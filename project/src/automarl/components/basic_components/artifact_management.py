@@ -93,6 +93,8 @@ class ArtifactComponent(Component):
                         )
                        }
   
+    _artifact_directory_parameters = ["artifact_relative_directory", "base_directory", "create_new_directory"]
+            
             
     def _on_parent_component_defined(self):
         '''Artifact Components try to get the directory of a parent component to use as a base directory'''
@@ -126,9 +128,18 @@ class ArtifactComponent(Component):
         
             
     
+    def _ensure_artifact_directory_inputs(self):
+
+        for key in self._artifact_directory_parameters:
+            if key not in self.input:
+                self.setup_default_value(key)
+
+
     def _generate_artifact_directory(self):
 
-        necessary_parameters = ["artifact_relative_directory", "base_directory", "create_new_directory"]
+        necessary_parameters = self._artifact_directory_parameters
+
+        self._ensure_artifact_directory_inputs()
         
         if not all(key in self.input.keys() for key in necessary_parameters):
             raise Exception(f'Artifact {self.name} with type {type(self)} trying to create a directory without the necessary parameters, needs {necessary_parameters} and has {self.input.keys()}')

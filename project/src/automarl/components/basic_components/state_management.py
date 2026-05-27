@@ -199,9 +199,6 @@ def save_state(component : Component, save_definition=True) -> None:
     for child_component in component.child_components:
         
         save_state(child_component, save_definition=False)
-        
-        if isinstance(child_component, StatefulComponent):
-            child_component.save_state(save_definition=False)
 
     if isinstance(component, StatefulComponent):
         component.save_state(save_definition=save_definition)

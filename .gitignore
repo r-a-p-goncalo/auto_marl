@@ -1,0 +1,14 @@
+
+**/__pycache__
+**/data
+peersim-environment/
+/peersim-project
+/project/automarl.egg-info
+/project/examples/simple_metarl/archived_data
+/project/examples/simple_metarl/state
+/archived_data
+/project/__debugs
+/project/.eggs
+/.vscode
+**.zip
+*.zip

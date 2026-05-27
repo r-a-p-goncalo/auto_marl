@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "automarl"
+description = "An AutoMARL library"
+authors = [
+    { name = "Ricardo Gonçalo" }
+]
+readme = "README.md"
+requires-python = ">=3.8"
+
+dependencies = [
+    "numpy",
+    "optuna",
+    "matplotlib",
+    "torch",
+    "gymnasium",
+    "pandas",
+    "wandb",
+    "pettingzoo",
+    "pygame",
+    "scikit-learn",
+    "plotly",
+    "nbformat"
+]
+
+dynamic = ["version"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["automarl*"]
+
+[tool.setuptools_scm]
+root = ".."
+relative_to = "pyproject.toml"
+write_to = "project/automarl/_version.py"

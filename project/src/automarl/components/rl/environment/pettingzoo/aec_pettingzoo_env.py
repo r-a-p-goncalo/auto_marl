@@ -11,7 +11,7 @@ from automarl.components.rl.environment.pettingzoo.petting_zoo_wrapper_env impor
 import torch
 import gymnasium
 
-from automarl.components.rl.environment.pettingzoo import ParallelEnv
+from pettingzoo import ParallelEnv
 
 
 # TODO: This should probably extend Gymnasium

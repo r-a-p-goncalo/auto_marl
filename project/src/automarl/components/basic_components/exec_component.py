@@ -2,7 +2,7 @@ from automarl.components.loggers.component_with_results import save_all_datafram
 from automarl.components.basic_components.state_management import save_state
 from automarl.utils.smart_enum import SmartEnum
 from automarl.components.loggers.logger_component import flush_text_of_all_loggers_and_children
-from ..component import ParameterSignature, Component, requires_input_process
+from automarl.component import ParameterSignature, Component, requires_input_process
 
 
 from typing import final

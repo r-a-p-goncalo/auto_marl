@@ -1,3 +1,3 @@
 
-import project.srcfrom automarl.components.rl.agent.agent_components
-import project.srcfrom automarl.components.rl.agent.agent_component_with_memory
+import automarl.components.rl.agent.agent_components
+import automarl.components.rl.agent.agent_component_with_memory

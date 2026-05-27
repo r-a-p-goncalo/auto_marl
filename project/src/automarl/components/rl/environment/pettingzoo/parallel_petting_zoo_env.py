@@ -9,7 +9,7 @@ import torch
 from automarl.utils.shapes_util import clone_shape
 
 
-from automarl.components.rl.environment.pettingzoo import ParallelEnv
+from pettingzoo import ParallelEnv
 import gymnasium
 
 import numpy as np

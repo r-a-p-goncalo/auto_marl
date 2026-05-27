@@ -6,7 +6,7 @@ import numpy as np
 import gymnasium
 import torch
 
-import project.srcfrom automarl.utils.json_utils.shape_json_utils # this is just so the code runs and we're sure shapes are serialized / deserialized
+import automarl.utils.json_utils.shape_json_utils # this is just so the code runs and we're sure shapes are serialized / deserialized
 
 from math import prod
 

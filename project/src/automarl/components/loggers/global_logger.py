@@ -9,8 +9,8 @@ DEFAULT_TO_PRINT_GLOBAL = False
 
 def print_general_information():
         
-        import project.src.automarl as automarl
         import torch
+        import automarl
 
         globalWriteLine(f"Global logger activation done, activated in {_global_logger.get_artifact_directory()}", toPrint=DEFAULT_TO_PRINT_GLOBAL)
         globalWriteLine(f"Process pid is {os.getpid()}, parent pid {os.getppid()}")
@@ -33,7 +33,6 @@ def print_general_information():
 def activate_global_logger(global_logger_directory, global_logger_input : dict ={}):
 
     from automarl.components.loggers.logger_component import LoggerSchema
-    import project.src.automarl as automarl
 
     if DEFAULT_TO_PRINT_GLOBAL:
         print(f"Global logger is trying to be activated in directory: {global_logger_directory}")

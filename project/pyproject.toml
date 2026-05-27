@@ -30,11 +30,13 @@ dynamic = ["version"]
 
 [tool.setuptools]
 include-package-data = true
+package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
+where = ["src"]
 include = ["automarl*"]
 
 [tool.setuptools_scm]
 root = ".."
 relative_to = "pyproject.toml"
-write_to = "project/automarl/_version.py"
+write_to = "src/automarl/_version.py"

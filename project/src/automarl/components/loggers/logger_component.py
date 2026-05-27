@@ -398,7 +398,14 @@ class ComponentWithLogging(ArtifactComponent):
         self._lg = new_logger
 
     def has_logger_object_defined(self):
-        hasattr(self, "_lg") and self._lg is not None
+        return hasattr(self, "_lg") and self._lg is not None
+
+    def _ensure_logger_object(self) -> LoggerSchema:
+
+        if not self.has_logger_object_defined():
+            self._lg = generate_logger_for_component(self)
+
+        return self._lg
 
     @property
     def lg(self) -> LoggerSchema:
@@ -420,7 +427,7 @@ class ComponentWithLogging(ArtifactComponent):
         if ctx_logger is not None:
             return ctx_logger
 
-        return self._lg
+        return self._ensure_logger_object()
 
 
     def change_logger_level(self, new_level : DEBUG_LEVEL):

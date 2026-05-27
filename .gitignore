@@ -12,3 +12,4 @@ peersim-environment/
 /.vscode
 **.zip
 *.zip
+*.egg-info

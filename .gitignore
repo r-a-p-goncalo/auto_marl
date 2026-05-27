@@ -13,3 +13,4 @@ peersim-environment/
 **.zip
 *.zip
 *.egg-info
+.codex/**

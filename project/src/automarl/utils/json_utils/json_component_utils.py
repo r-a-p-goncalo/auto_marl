@@ -9,7 +9,7 @@ from automarl.utils.class_util import get_class_from, is_valid_str_class_definit
 from enum import Enum
 
 from automarl.utils.json_utils.custom_json_logic import get_custom_strategy
-from automarlcore.localizations import get_component_by_localization
+from automarl.core.localizations import get_component_by_localization
 from automarl.components.loggers.global_logger import globalWriteLine
 
 import inspect
@@ -556,7 +556,7 @@ def get_class_with_context(class_definition, input=None):
     
     if TRY_CORRECT_ABSTRACT_CLASSES and input is not None and inspect.isabstract(to_return):
         globalWriteLine(f"Trying to load class {class_definition}, which is abstract, will try to look for substitute...")
-        from automarlcore.advanced_component_creation import get_sub_class_with_correct_parameter_signature
+        from automarl.core.advanced_component_creation import get_sub_class_with_correct_parameter_signature
         try:
             to_return = get_sub_class_with_correct_parameter_signature(to_return, input)
             globalWriteLine(f"Class was substituted by {to_return}")

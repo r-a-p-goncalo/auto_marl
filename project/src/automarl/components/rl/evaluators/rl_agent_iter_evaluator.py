@@ -2,12 +2,12 @@
 from automarl.component import Component, requires_input_process
 from automarl.components.basic_components.evaluator_component import EvaluatorComponent
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
-from automarlcore.advanced_input_management import ComponentListParameterSignature
+from automarl.core.advanced_input_management import ComponentListParameterSignature
 from automarl.components.rl.evaluators.rl_single_agent_evaluator import RlSingleAgentEvaluator
 from automarl.components.rl.evaluators.rl_component_evaluator import RLPipelineEvaluator
 from automarl.components.rl.agent.agent_components import AgentSchema
 from automarl.components.rl.environment.environment_components import EnvironmentComponent
-from automarlcore.localizations import get_component_by_localization
+from automarl.core.localizations import get_component_by_localization
 
 
 class RLAgentIterEvaluator(RLPipelineEvaluator):

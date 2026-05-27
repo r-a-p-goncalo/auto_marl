@@ -1,6 +1,6 @@
 from automarl.components.basic_components.evaluator_component import EvaluatorComponent
 from automarl.component import Component
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 
 
 class ValueEvaluator(EvaluatorComponent):

@@ -1,6 +1,6 @@
 
 
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 from automarl.components.hp_opt.samplers.sampler import OptunaSamplerComponent, OptunaSamplerWrapper
 
 import optuna

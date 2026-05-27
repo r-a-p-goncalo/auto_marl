@@ -1,7 +1,7 @@
 
 
 from automarl.components.fundamentals.translator.translator import Translator
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.utils.shapes_util import torch_shape_from_space
 import torch
 

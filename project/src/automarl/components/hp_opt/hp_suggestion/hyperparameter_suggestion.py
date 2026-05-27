@@ -6,7 +6,7 @@ from automarl.utils.json_utils.json_component_utils import decode_components_inp
 from automarl.utils.json_utils.custom_json_logic import CustomJsonLogic, register_custom_strategy
 import optuna
 
-from automarlcore.localizations import get_component_by_localization_list, get_last_collection_where_value_is, safe_get, safe_general_remove
+from automarl.core.localizations import get_component_by_localization_list, get_last_collection_where_value_is, safe_get, safe_general_remove
 from automarl.components.loggers.global_logger import globalWriteLine
 
 class HyperparameterSuggestion(CustomJsonLogic):

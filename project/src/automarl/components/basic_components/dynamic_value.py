@@ -1,9 +1,9 @@
 
 from automarl.component import Component, requires_input_process
-from automarlcore.input_management import ParameterSignature
-from automarlcore.advanced_input_management import ComponentParameterSignature, LookableParameterSignature
+from automarl.core.input_management import ParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature, LookableParameterSignature
 
-from automarlcore.types import numeric_type
+from automarl.core.types import numeric_type
 from automarl.components.loggers.global_logger import globalWriteLine, is_global_logger_active
 
 def get_value_or_dynamic_value(value) -> any:

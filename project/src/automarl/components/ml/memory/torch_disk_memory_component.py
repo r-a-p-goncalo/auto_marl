@@ -3,7 +3,7 @@
 from collections import namedtuple
 from typing import Iterable
 from automarl.component import Component, requires_input_process
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.loggers.logger_component import ComponentWithLogging
 from automarl.utils.maths import nearest_highest_multiple, nearest_multiple
 from automarl.utils.shapes_util import discrete_output_layer_size_of_space
@@ -16,7 +16,7 @@ import torch
 from pathlib import Path
 
 from automarl.component import Component, requires_input_process
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.loggers.logger_component import ComponentWithLogging
 from automarl.utils.shapes_util import discrete_output_layer_size_of_space
 from automarl.components.ml.memory.memory_components import MemoryComponent

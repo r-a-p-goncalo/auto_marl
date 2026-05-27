@@ -2,7 +2,7 @@ import math
 from typing import Dict
 from automarl.components.basic_components.EventfulComponent import EventfulComponent
 from automarl.component import ParameterSignature, requires_input_process
-from automarlcore.advanced_input_management import ComponentDictParameterSignature
+from automarl.core.advanced_input_management import ComponentDictParameterSignature
 from automarl.components.loggers.component_with_results import ComponentWithResults
 from automarl.components.rl.agent.agent_components import AgentSchema
 from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer

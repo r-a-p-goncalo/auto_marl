@@ -2,9 +2,9 @@ from abc import abstractmethod
 
 from automarl.component import ParameterSignature, requires_input_process
 
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 from automarl.utils.shapes_util import double_final_size
-from automarlcore.localizations import get_component_by_localization
+from automarl.core.localizations import get_component_by_localization
 from automarl.components.rl.environment.environment_components import EnvironmentComponent
 import torch
 

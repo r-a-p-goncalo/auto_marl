@@ -2,7 +2,7 @@ import os
 import traceback
 from automarl.components.basic_components.exec_component import ExecComponent
 from automarl.component import ParameterSignature, requires_input_process
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 from automarl.components.loggers.component_with_results import ComponentWithResults
 from automarl.components.rl.agent.agent_components import AgentSchema
 from automarl.components.basic_components.state_management import StatefulComponent

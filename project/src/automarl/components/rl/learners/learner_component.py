@@ -1,7 +1,7 @@
 from automarl.component import Component, ParameterSignature, requires_input_process
 
 
-from automarlcore.advanced_input_management import ComponentParameterSignature, ComponentListParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature, ComponentListParameterSignature
 from automarl.components.fundamentals.acessories import AcessoryComponent
 from automarl.components.ml.memory.memory_utils import interpret_values, interpret_values
 from automarl.components.rl.agent.agent_components import AgentSchema

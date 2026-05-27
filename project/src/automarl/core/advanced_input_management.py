@@ -5,9 +5,9 @@
         
 
 from automarl.component import Component
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.utils.json_utils.json_component_utils import gen_component_from
-from automarlcore.localizations import get_component_by_localization
+from automarl.core.localizations import get_component_by_localization
 
 
 CHANGE_INPUT = True

@@ -4,7 +4,7 @@ from automarl.components.basic_components.evaluator_component import ComponentWi
 from automarl.components.basic_components.exec_component import ExecComponent
 from automarl.components.basic_components.seeded_component import SeededComponent
 from automarl.component import ParameterSignature, requires_input_process
-from automarlcore.advanced_component_creation import get_sub_class_with_correct_parameter_signature
+from automarl.core.advanced_component_creation import get_sub_class_with_correct_parameter_signature
 from automarl.components.loggers.component_with_results import ComponentWithResults
 from automarl.components.rl.agent.agent_components import AgentSchema
 from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
@@ -20,10 +20,10 @@ import gc
 
 from automarl.components.loggers.logger_component import LoggerSchema, ComponentWithLogging
 
-from automarlcore.advanced_input_management import ComponentDictParameterSignature, ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentDictParameterSignature, ComponentParameterSignature
 
 from automarl.utils.random_utils import generate_seed, do_full_setup_of_single_seed
-from automarlcore.exceptions import common_exception_handling
+from automarl.core.exceptions import common_exception_handling
 
 class RLPipelineComponent(ExecComponent, StatefulComponent, ComponentWithEvaluator, SeededComponent, ComponentWithLogging, ComponentWithResults):
     

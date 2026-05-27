@@ -2,7 +2,7 @@
 from typing import Union
 from automarl.component import Component, requires_input_process
 from automarl.components.basic_components.artifact_management import ArtifactComponent
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.loggers.result_logger import ResultLogger, get_results_logger_from_file
 
 

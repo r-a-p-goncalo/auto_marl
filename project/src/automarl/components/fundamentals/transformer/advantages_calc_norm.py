@@ -1,8 +1,8 @@
 
 
 from automarl.component import Component
-from automarlcore.advanced_input_management import ComponentListParameterSignature
-from automarlcore.input_management import ParameterSignature
+from automarl.core.advanced_input_management import ComponentListParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.fundamentals.transformer.transformer import Transformer
 
 

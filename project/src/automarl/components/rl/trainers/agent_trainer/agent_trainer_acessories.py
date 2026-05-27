@@ -1,7 +1,7 @@
 from automarl.components.basic_components.dynamic_value import get_value_or_dynamic_value
 from automarl.component import Component, ParameterSignature, requires_input_process
 
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 from automarl.components.fundamentals.acessories import AcessoryComponent
 
 

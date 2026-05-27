@@ -1,7 +1,7 @@
 
 
 from automarl.component import requires_input_process
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.rl.agent.agent_components import AgentSchema
 from automarl.utils.shapes_util import torch_shape_from_space
 import torch

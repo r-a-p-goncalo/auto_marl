@@ -1,7 +1,7 @@
 import torch
 from automarl.components.rl.learners.ppo_learner import PPOLearner
 from automarl.components.rl.learners.debug.learner_debug import LearnerDebug
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.ml.models.torch_model_components import TorchModelComponent
 
 import torch.nn.functional as F

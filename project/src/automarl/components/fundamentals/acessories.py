@@ -1,7 +1,7 @@
 
 
 from automarl.component import Component, requires_input_process
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 
 class AcessoryComponent(Component):
     

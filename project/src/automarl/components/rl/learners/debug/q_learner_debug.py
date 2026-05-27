@@ -6,7 +6,7 @@ from automarl.component import requires_input_process
 from automarl.components.rl.learners.q_learner import DeepQLearnerSchema, QLearnerSchema
 from automarl.components.ml.models.torch_model_components import TorchModelComponent
 from automarl.components.ml.models.torch_model_utils import model_parameter_distance
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 import torch
 
 from automarl.components.rl.learners.debug.learner_debug import LearnerDebug

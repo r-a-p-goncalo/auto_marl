@@ -1,8 +1,8 @@
-from automarlcore.input_management import ParameterMetaData, ParameterSignature
+from automarl.core.input_management import ParameterMetaData, ParameterSignature
 from types import FunctionType
 import copy
 
-from automarlcore.localizations import get_child_by_name, get_component_by_localization, get_index_localization, get_source_component
+from automarl.core.localizations import get_child_by_name, get_component_by_localization, get_index_localization, get_source_component
 
 from automarl.utils.class_util import get_class_from
 from automarl.components.loggers.global_logger import globalWriteLine
@@ -331,7 +331,7 @@ class Component(metaclass=Schema): # a component that receives and verifies inpu
         passed_child_components = self.get_input_value("child_components")
 
         if passed_child_components is not None:
-            from automarlcore.advanced_input_management import ComponentListParameterSignature
+            from automarl.core.advanced_input_management import ComponentListParameterSignature
             passed_child_components = ComponentListParameterSignature.get_value_from_input_class(self, "child_components", is_none_ok=True)
 
             for passed_child_component in passed_child_components:

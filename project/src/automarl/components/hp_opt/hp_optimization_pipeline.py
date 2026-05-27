@@ -2,7 +2,7 @@ import os
 from typing import Union
 from automarl.component import ParameterSignature, Component, requires_input_process
 from automarl.components.basic_components.exec_component import ExecComponent, State
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 from automarl.components.basic_components.evaluator_component import ComponentWithEvaluator, EvaluatorComponent
 from automarl.components.hp_opt.hp_suggestion.hyperparameter_suggestion import HyperparameterSuggestion
 from automarl.components.hp_opt.samplers.sampler import OptunaSamplerComponent, OptunaSamplerWrapper
@@ -26,9 +26,9 @@ from automarl.components.basic_components.state_management import save_state
 import copy
 
 from automarl.consts import CONFIGURATION_FILE_NAME
-from automarlcore.exceptions import common_exception_handling
+from automarl.core.exceptions import common_exception_handling
 
-from automarlcore.debug.debug_utils import substitute_classes_by_debug_classes
+from automarl.core.debug.debug_utils import substitute_classes_by_debug_classes
 import pandas
 
 from automarl.components.hp_opt.pruners.pruner import OptunaPrunerWrapper, OptunaPrunerComponent

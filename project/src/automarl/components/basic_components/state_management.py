@@ -25,7 +25,7 @@ import torch
                 
 import sys
 
-from automarlcore.global_class_registry import get_registered_classes_generators, has_registered_classes_generators, serialize_registered_classes, load_custom_classes
+from automarl.core.global_class_registry import get_registered_classes_generators, has_registered_classes_generators, serialize_registered_classes, load_custom_classes
                 
                 
 

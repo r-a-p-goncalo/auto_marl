@@ -1,7 +1,7 @@
 
 from automarl.components.basic_components.exec_component import ParameterSignature
 from automarl.component import Component, requires_input_process
-from automarlcore.advanced_input_management import ComponentParameterSignature, ComponentListParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature, ComponentListParameterSignature
 from automarl.components.ml.memory.memory_components import MemoryComponent
 from automarl.components.ml.memory.memory_samplers.memory_sampler import MemorySampler
 from automarl.components.ml.memory.memory_utils import interpret_values

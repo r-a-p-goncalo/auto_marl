@@ -4,7 +4,7 @@ from automarl.component import Component
 
 from automarl.utils.files_utils import new_path_if_exists, open_or_create_folder
 
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 
 import os
 

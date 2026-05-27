@@ -3,8 +3,8 @@
 
 
 from automarl.component import Component
-from automarlcore.input_management import ParameterSignature
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.input_management import ParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 from automarl.components.loggers.global_logger import globalWriteLine
 
 

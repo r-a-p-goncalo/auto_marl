@@ -1,6 +1,6 @@
 from automarl.component import Component, ParameterSignature, requires_input_process
 
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 from automarl.components.ml.models.model_components import ModelComponent
 
 from automarl.utils.class_util import get_class_from

@@ -1,7 +1,7 @@
 
 
 from automarl.components.rl.trainers.rl_trainer.rl_trainer_mappo import RLTrainerMAPPO
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.loggers.debug.component_with_logging_debug import ComponentDebug
 from automarl.utils.str_utils import generate_str_fixed_chars
 

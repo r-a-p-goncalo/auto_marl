@@ -3,8 +3,8 @@
 from automarl.components.basic_components.component_group import RunnableComponentGroup
 from automarl.components.basic_components.evaluator_component import EvaluatorComponent
 from automarl.component import Component, requires_input_process
-from automarlcore.advanced_input_management import ComponentParameterSignature
-from automarlcore.input_management import ParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.loggers.result_logger import ResultLogger
 import pandas
 

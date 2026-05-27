@@ -63,7 +63,7 @@ def main(component_path, target_dir=None, target_dir_name=None,
 
         if global_logger is not None:
 
-            from automarlcore.exceptions import common_exception_handling
+            from automarl.core.exceptions import common_exception_handling
             common_exception_handling(global_logger, e, "on_load_error.txt")
 
         raise e
@@ -98,7 +98,7 @@ def main(component_path, target_dir=None, target_dir_name=None,
 
         if global_logger is not None:
 
-            from automarlcore.exceptions import common_exception_handling
+            from automarl.core.exceptions import common_exception_handling
             common_exception_handling(global_logger, e, "on_input_handling_error.txt")
 
         raise e
@@ -115,7 +115,7 @@ def main(component_path, target_dir=None, target_dir_name=None,
 
         if global_logger is not None:
 
-            from automarlcore.exceptions import common_exception_handling
+            from automarl.core.exceptions import common_exception_handling
             common_exception_handling(global_logger, e, "on_run_error.txt")
 
         raise e        

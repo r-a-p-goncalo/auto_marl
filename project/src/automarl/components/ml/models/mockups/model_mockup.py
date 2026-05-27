@@ -1,7 +1,7 @@
 
 
 from automarl.component import Component, requires_input_process
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.ml.models.model_components import ModelComponent
 from automarl.utils.shapes_util import discrete_input_layer_size_of_space, discrete_output_layer_size_of_space
 import torch

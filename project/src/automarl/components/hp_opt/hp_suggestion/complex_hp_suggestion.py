@@ -2,7 +2,7 @@
 
 import copy
 from automarl.component import Component
-from automarlcore.localizations import get_last_collection_where_value_is
+from automarl.core.localizations import get_last_collection_where_value_is
 from automarl.components.hp_opt.hp_suggestion.hyperparameter_suggestion import HyperparameterSuggestion
 import optuna
 from automarl.utils.json_utils.custom_json_logic import register_custom_strategy

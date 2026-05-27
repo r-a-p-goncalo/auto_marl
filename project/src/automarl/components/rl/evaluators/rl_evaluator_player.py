@@ -4,14 +4,14 @@ import os
 from automarl.utils.random_utils import generate_seed
 import pandas
 from automarl.component import Component
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 from automarl.utils.json_utils.json_component_utils import gen_component_from
 from automarl.components.loggers.logger_component import LoggerSchema, use_logger
 from automarl.components.rl.evaluators.rl_component_evaluator import RLPipelineEvaluator
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
 from automarl.components.loggers.result_logger import aggregate_results_logger
 
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 
 from automarl.components.rl.rl_player.rl_player import RLPlayer
 from automarl.components.rl.evaluators.rl_std_avg_evaluator import LastValuesAvgStdEvaluator

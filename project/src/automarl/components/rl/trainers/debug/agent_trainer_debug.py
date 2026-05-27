@@ -4,7 +4,7 @@
 from automarl.components.loggers.debug.component_with_logging_debug import ComponentDebug
 from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer
 from automarl.components.ml.models.torch_model_components import TorchModelComponent
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.ml.models.torch_model_utils import model_parameter_distance
 
 class AgentTrainerDebug(AgentTrainer, ComponentDebug):

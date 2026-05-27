@@ -6,7 +6,7 @@ from automarl.components.rl.agent.agent_components import AgentSchema
 from automarl.components.rl.policy.random_policy import RandomPolicy
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
 from automarl.components.rl.rl_player.rl_player import RLPlayer
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.rl.policy.policy import Policy
 from automarl.utils.class_util import get_class_from
 from automarl.utils.json_utils.json_component_utils import gen_component_from

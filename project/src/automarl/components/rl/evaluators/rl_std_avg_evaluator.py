@@ -4,7 +4,7 @@ from automarl.components.rl.evaluators.rl_component_evaluator import RLPipelineE
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
 from automarl.components.loggers.result_logger import ResultLogger
 
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.loggers.global_logger import globalWriteLine
 
 class LastValuesAvgStdEvaluator(RLPipelineEvaluator):

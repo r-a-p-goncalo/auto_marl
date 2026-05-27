@@ -1,6 +1,6 @@
 from automarl.components.basic_components.exec_component import ExecComponent
 from automarl.component import ParameterSignature, requires_input_process
-from automarlcore.advanced_input_management import ComponentParameterSignature, ComponentListParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature, ComponentListParameterSignature
 from automarl.components.fundamentals.acessories import AcessoryComponent
 from automarl.components.loggers.component_with_results import ComponentWithResults
 from automarl.components.loggers.logger_component import ComponentWithLogging

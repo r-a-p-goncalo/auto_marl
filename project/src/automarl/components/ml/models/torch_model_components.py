@@ -10,7 +10,7 @@ from automarl.components.hp_opt.hp_suggestion.single_hp_suggestion import Single
 from automarl.component import Component, ParameterSignature, requires_input_process
 from automarl.components.ml.models.model_components import ModelComponent
 
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 
 from automarl.components.ml.models.model_initialization_strategy import TorchModelInitializationStrategy
 

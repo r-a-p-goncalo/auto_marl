@@ -1,6 +1,6 @@
 from types import FunctionType
 from automarl.component import Component, ParameterSignature, requires_input_process
-from automarlcore.advanced_input_management import ComponentListParameterSignature
+from automarl.core.advanced_input_management import ComponentListParameterSignature
 from automarl.components.basic_components.sampler import Sampler
 from abc import abstractmethod
 

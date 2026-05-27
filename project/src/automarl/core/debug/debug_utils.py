@@ -1,6 +1,6 @@
 
 from automarl.component import Schema, get_class_from
-from automarlcore.global_class_registry import register_custom_class
+from automarl.core.global_class_registry import register_custom_class
 from automarl.components.fundamentals.translator.translator import Component
 from automarl.utils.class_util import is_valid_str_class_definition, organize_collection_from_subclass_to_super_class
 

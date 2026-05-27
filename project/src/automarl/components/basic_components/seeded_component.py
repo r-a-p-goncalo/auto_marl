@@ -2,7 +2,7 @@
 
 
 from automarl.component import Component
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.loggers.logger_component import ComponentWithLogging
 from automarl.utils.random_utils import SEED_GLOBAL_LOGGER, do_full_setup_of_single_seed, generate_seed, setup_seed_from_dict_configuration
 from automarl.components.loggers.global_logger import globalWriteLine

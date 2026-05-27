@@ -1,8 +1,8 @@
 
 
 from automarl.component import Component, requires_input_process
-from automarlcore.advanced_input_management import ComponentParameterSignature, ComponentListParameterSignature
-from automarlcore.input_management import ParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature, ComponentListParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.ml.memory.memory_components import MemoryComponent
 
 

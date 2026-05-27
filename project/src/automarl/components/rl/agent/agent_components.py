@@ -1,7 +1,7 @@
 
 # DEFAULT COMPONENTS -------------------------------------
 
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 
 from automarl.components.rl.policy.policy import Policy
 

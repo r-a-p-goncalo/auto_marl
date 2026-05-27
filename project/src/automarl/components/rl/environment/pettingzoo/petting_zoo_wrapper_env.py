@@ -4,7 +4,7 @@ from automarl.components.rl.environment.environment_components import Environmen
 from automarl.component import requires_input_process
 import gymnasium
 from automarl.utils.shapes_util import clone_shape
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 
 
 class PettingZooWrapper(EnvironmentComponent):

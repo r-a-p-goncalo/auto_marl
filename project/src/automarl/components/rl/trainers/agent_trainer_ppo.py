@@ -3,7 +3,7 @@ from automarl.components.rl.policy.stochastic_policy import StochasticPolicy
 from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer
 
 from automarl.components.rl.learners.ppo_learner import PPOLearner
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 import torch
 
 class AgentTrainerPPO(AgentTrainer):

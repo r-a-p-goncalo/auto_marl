@@ -1,5 +1,5 @@
 import copy
-from automarlcore.input_management import ParameterSignature, fuse_input_signatures
+from automarl.core.input_management import ParameterSignature, fuse_input_signatures
 from abc import ABCMeta
 
 

@@ -2,7 +2,7 @@
 
 import types
 
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.basic_components.exec_component import ExecComponent
 
 class WhileFunDoFunComponent(ExecComponent):

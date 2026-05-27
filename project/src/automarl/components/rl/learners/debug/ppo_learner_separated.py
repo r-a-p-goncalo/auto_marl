@@ -1,6 +1,6 @@
 import torch
 
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 from automarl.components.loggers.debug.component_with_logging_debug import ComponentDebug
 from automarl.components.rl.learners.debug.learner_debug import LearnerDebug
 from automarl.components.rl.learners.ppo_learner_separated import PPOLearnerNoCritic, PPOLearnerOnlyCritic

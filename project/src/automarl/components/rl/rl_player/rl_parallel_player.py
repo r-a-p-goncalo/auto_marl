@@ -1,5 +1,5 @@
 from automarl.components.rl.rl_player.rl_player import RLPlayer
-from automarlcore.input_management import ParameterSignature
+from automarl.core.input_management import ParameterSignature
 import torch
 from automarl.components.rl.environment.parallel_environment import ParallelEnvironmentComponent
 

@@ -1,8 +1,8 @@
 from automarl.component import Component, ParameterSignature, requires_input_process
-from automarlcore.advanced_input_management import ComponentParameterSignature, LookableParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature, LookableParameterSignature
 from automarl.components.ml.models.model_components import ModelComponent
 from automarl.components.basic_components.dynamic_value import get_value_or_dynamic_value
-from automarlcore.advanced_input_utils import get_value_of_type_or_component
+from automarl.core.advanced_input_utils import get_value_of_type_or_component
 from automarl.components.loggers.logger_component import ComponentWithLogging
 import torch.optim as optim
 import torch.nn as nn

@@ -3,7 +3,7 @@ from automarl.components.basic_components.component_group import RunnableCompone
 
 from automarl.components.basic_components.exec_component import State
 from automarl.component import Component, ParameterSignature
-from automarlcore.exceptions import common_exception_handling
+from automarl.core.exceptions import common_exception_handling
 from automarl.components.hp_opt.hp_optimization_pipeline import Component_to_opt_type, HyperparameterOptimizationPipeline
 
 import math

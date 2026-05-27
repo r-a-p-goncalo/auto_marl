@@ -10,7 +10,7 @@ from automarl.component import ParameterSignature, requires_input_process
 from automarl.components.basic_components.exec_component import ExecComponent
 from automarl.components.basic_components.seeded_component import SeededComponent
 from automarl.components.basic_components.evaluator_component import ComponentWithEvaluator, EvaluatorComponent
-from automarlcore.advanced_input_management import ComponentListParameterSignature
+from automarl.core.advanced_input_management import ComponentListParameterSignature
 from automarl.components.loggers.component_with_results import ComponentWithResults, DEFAULT_RESULTS_LOGGER_KEY
 from automarl.components.loggers.global_logger import globalWriteLine
 from automarl.components.loggers.logger_component import ComponentWithLogging

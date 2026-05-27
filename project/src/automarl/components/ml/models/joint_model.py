@@ -1,6 +1,6 @@
 from automarl.components.basic_components.artifact_management import generate_target_directory
 from automarl.component import requires_input_process
-from automarlcore.advanced_input_management import ComponentListParameterSignature
+from automarl.core.advanced_input_management import ComponentListParameterSignature
 from automarl.components.ml.models.torch_model_components import TorchModelComponent
 import torch
 import torch.nn as nn

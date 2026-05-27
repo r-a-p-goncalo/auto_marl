@@ -1,7 +1,7 @@
 
 from automarl.component import ParameterSignature, requires_input_process
 
-from automarlcore.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentParameterSignature
 from automarl.components.loggers.logger_component import ComponentWithLogging
 from automarl.components.ml.models.model_components import ModelComponent
 from automarl.components.ml.optimizers.optimizer_components import OptimizerSchema, AdamOptimizer

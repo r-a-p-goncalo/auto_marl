@@ -20,7 +20,7 @@ class AECGymnasiumEnvironmentWrapper(AECEnvironmentComponent, SeededComponent, S
 
     parameters_signature = {
         "environment": ParameterSignature(default_value="CartPole-v1"),
-        "render_mode": ParameterSignature(default_value="rgb_array", validity_verificator=lambda x: x in ["rgb_array", "human"])
+        "render_mode": ParameterSignature(default_value="rgb_array", validity_verificator=lambda x: x in ["rgb_array", "human", "none"])
     }
         
         

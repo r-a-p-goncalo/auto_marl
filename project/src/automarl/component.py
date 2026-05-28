@@ -651,14 +651,18 @@ class Component(metaclass=Schema): # a component that receives and verifies inpu
 
             for validity_verificator in validity_verificator_list:
             
-                is_a_correct_type = validity_verificator(input_value) #use the verificator the Component has specified in its input signature
+                try:
+            
+                    is_a_correct_type = validity_verificator(input_value) #use the verificator the Component has specified in its input signature
 
-                if not isinstance(is_a_correct_type, bool): #validity_verification must return bool
-                    raise Exception(f"In component {self.name}, of type {type(self)}: Validity verification on key '{input_key}' returned a type other than bool")
+                    if not isinstance(is_a_correct_type, bool): #validity_verification must return bool
+                        raise Exception(f"In component {self.name}, of type {type(self)}: Validity verification on key '{input_key}' returned a type other than bool")
 
-                elif is_a_correct_type == False:
-                    raise Exception(f"In component {self.name}, of type {type(self)}: Value with key '{input_key}', of type {type(input_value)} did not pass Component specified validity verificator") 
+                    elif is_a_correct_type == False:
+                        raise Exception(f"In component {self.name}, of type {type(self)}: Value with key '{input_key}', of type {type(input_value)} did not pass Component specified validity verificator") 
 
+                except Exception as e:
+                    raise Exception(f"In component {self.name}, of type {type(self)}: Value with key '{input_key}', of type {type(input_value)} did not pass Component specified validity verificator due to reason: {e}") from e
 
 
 

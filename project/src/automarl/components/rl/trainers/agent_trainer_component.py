@@ -493,7 +493,8 @@ class AgentTrainer(ComponentWithLogging, ComponentWithResults, EventfulComponent
 
 
         if new_state is not None: # if we received a new state
-            new_state = self.agent.get_internal_agent_state_with_new(new_state).clone()
+            #new_state = self.agent.get_internal_agent_state_with_new(new_state).clone()
+            new_state = {**self.agent.get_internal_agent_state_with_new(new_state)}
 
         elif self._pending_next_state is not None: # if we have a pending next state
             new_state = self._pending_next_state

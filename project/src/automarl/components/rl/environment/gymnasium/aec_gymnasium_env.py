@@ -168,7 +168,7 @@ class AECGymnasiumEnvironmentWrapper(AECEnvironmentComponent, SeededComponent, S
         return self.env.observation_space
 
     
-    def observe(self):
+    def observe(self, *args):
         return self.last_observation
     
     def get_env_info(self):

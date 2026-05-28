@@ -13,6 +13,7 @@ from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 
 import numpy as np
+from automarl.utils.statistics.statistics import aggregate_series
 
 RESULTS_FILENAME = 'results.csv'
 
@@ -374,6 +375,8 @@ class ResultLogger(LoggerSchema):
 
         if to_show:
             plt.show()
+
+
             
     @requires_input_process
     def plot_confidence_interval(self, x_axis : str, y_column : str, y_values_label : str = 'mean', show_std=True, alpha=0.3, 
@@ -400,14 +403,7 @@ class ResultLogger(LoggerSchema):
             values = values[x_slice_range[0]:max(x_slice_range[1], len(x_values))]
 
         if aggregate_number is not None:
-
-            aggregated_values = [ [ values[u - aggregate_number + i] for i in range(0, aggregate_number * 2) ] for u in range(aggregate_number, len(values) - aggregate_number) ]
-            x_values = x_values[aggregate_number:(len(x_values) - aggregate_number)]
-
-            mean_values = np.mean(aggregated_values, axis=1)
-
-            if show_std:
-                std_values = np.std(aggregated_values, axis=1)
+            x_values, mean_values, std_values = aggregate_series(values, aggregate_number, show_std)
 
         else: # aggregate number is None
             mean_values = values
@@ -925,3 +921,4 @@ def aggregate_results_logger(results_logger_objects : list[ResultLogger], new_di
     return resuls_logger
     
     
+

@@ -14,8 +14,7 @@ import gymnasium
 from pettingzoo import ParallelEnv
 
 
-# TODO: This should probably extend Gymnasium
-class AECPettingZooEnvironmentWrapper(AECGymnasiumEnvironmentWrapper, PettingZooWrapper):
+class AECPettingZooEnvironmentWrapper(PettingZooWrapper, AECGymnasiumEnvironmentWrapper):
         
     # INITIALIZATION --------------------------------------------------------------------------
 

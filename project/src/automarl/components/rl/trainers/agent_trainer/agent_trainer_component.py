@@ -400,12 +400,12 @@ class AgentTrainer(ComponentWithLogging, ComponentWithResults, EventfulComponent
     def do_training_step(self, i_episode, env : AECEnvironmentComponent):
         
         '''
-        Does a step, in which the agent acts and observers the transition
+        Does a step, in which the agent acts and observes the transition
         Note that any other agents will not notice this change without outside coordination
             
         This method can be used when the agent is not training
 
-        Note this method is not used in Parallel players or trainers, only aec
+        Note this method is not used in Parallel players or trainers and expects AEC usage
         '''
 
         observation, reward, done, truncated, info = env.last() # in aec, we receive the results of the previous episode step

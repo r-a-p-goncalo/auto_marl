@@ -4,7 +4,7 @@ from automarl.components.ml.memory.memory_samplers.advantages_calc_sampler impor
 from automarl.components.rl.trainers.rl_trainer.rl_trainer_orquestrator import RLTrainerOrquestrator
 from automarl.components.rl.learners.ppo_learner_separated import PPOLearnerOnlyCritic
 from automarl.core.input_management import ParameterSignature
-from automarl.components.rl.trainers.agent_trainer_ppo import AgentTrainerPPOCriticAware
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_ppo import AgentTrainerPPOCriticAware
 
 import torch
 

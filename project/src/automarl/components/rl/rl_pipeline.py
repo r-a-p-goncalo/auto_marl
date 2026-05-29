@@ -7,7 +7,7 @@ from automarl.component import ParameterSignature, requires_input_process
 from automarl.core.advanced_component_creation import get_sub_class_with_correct_parameter_signature
 from automarl.components.loggers.component_with_results import ComponentWithResults
 from automarl.components.rl.agent.agent_components import AgentSchema
-from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
+from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 from automarl.components.rl.environment.aec_environment import AECEnvironmentComponent
 from automarl.components.rl.environment.pettingzoo.aec_pettingzoo_env import AECPettingZooEnvironmentWrapper
 from automarl.utils.files_utils import open_or_create_folder
@@ -170,6 +170,8 @@ class RLPipelineComponent(ExecComponent, StatefulComponent, ComponentWithEvaluat
         self.rl_trainer : RLTrainerComponent = self.get_input_value("rl_trainer", look_in_value_with_key="rl_trainer", look_in_attribute_with_name="rl_trainer")
         
         self.rl_trainer.pass_input(rl_trainer_input)
+
+        self.lg.writeLine(f"RL trainer is of type {type(self.rl_trainer)} and environment of type: {self.env.get_environment_type()}")
 
             
     def initialize_agents_components(self):

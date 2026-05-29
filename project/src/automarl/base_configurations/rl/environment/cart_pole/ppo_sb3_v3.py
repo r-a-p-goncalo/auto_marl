@@ -36,9 +36,9 @@ from automarl.components.rl.learners.convergence_detectors.avg_out_convergence_d
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
 from automarl.components.rl.rl_player.rl_player import RLPlayer
 from automarl.components.rl.trainers.agent_trainer.agent_trainer_acessories import AgentTrainerConvergenceDetector, AgentTrainerSlopeConvergenceDetector
-from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
+from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 from automarl.components.rl.policy.stochastic_policy import StochasticPolicy
-from automarl.components.rl.trainers.agent_trainer_ppo import AgentTrainerPPO
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_ppo import AgentTrainerPPO
 from automarl.components.rl.learners.ppo_learner import PPOLearner
 from automarl.components.ml.optimizers.optimizer_components import AdamOptimizer
 from automarl.components.basic_components.dynamic_value import DynamicLinearValueInRangeBasedOnComponent

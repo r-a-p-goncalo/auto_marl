@@ -9,7 +9,7 @@ from automarl.components.rl.learners.ppo_learner import PPOLearner
 
 from automarl.components.rl.policy.stochastic_policy import StochasticPolicy
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
-from automarl.components.rl.trainers.agent_trainer_ppo import AgentTrainerPPO
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_ppo import AgentTrainerPPO
 from automarl.components.rl.environment.pettingzoo.parallel_petting_zoo_env import PettingZooEnvironmentWrapperParallel
 from automarl.components.rl.trainers.rl_trainer.parallel_rl_trainer import RLTrainerComponentParallel
 from automarl.components.fundamentals.translator.torch_image_state_translator import ImageReverterToSingleChannel, ImageNormalizer

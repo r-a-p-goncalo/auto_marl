@@ -4,6 +4,8 @@ from automarl.component import requires_input_process
 
 from abc import abstractmethod
 
+from automarl.components.rl.environment.environment_type import EnvironmentType
+
 class ParallelEnvironmentComponent(EnvironmentComponent):
     
     parameters_signature =  {} 
@@ -19,4 +21,6 @@ class ParallelEnvironmentComponent(EnvironmentComponent):
         """
         pass
 
+    def get_environment_type(self) -> EnvironmentType:
+        return EnvironmentType.PARALLEL
         

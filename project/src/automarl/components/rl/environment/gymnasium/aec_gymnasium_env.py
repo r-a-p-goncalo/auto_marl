@@ -9,6 +9,7 @@ from automarl.components.rl.environment.environment_components import Environmen
 from automarl.utils.shapes_util import torch_state_shape_from_space
 
 import gymnasium as gym
+from automarl.components.rl.environment.environment_type import EnvironmentType
 import torch
 import gymnasium
 from automarl.utils.shapes_util import clone_shape
@@ -43,7 +44,8 @@ class AECGymnasiumEnvironmentWrapper(AECEnvironmentComponent, SeededComponent, S
         self.total_reset()   
 
 
-        
+    def get_environment_type(self) -> EnvironmentType:
+        return EnvironmentType.SINGLE
 
     def _setup_environment(self):
 
@@ -96,19 +98,29 @@ class AECGymnasiumEnvironmentWrapper(AECEnvironmentComponent, SeededComponent, S
             "observation": clone_shape(obs_space)
         }
 
+    def _reset_internal_values(self, observation, info):
+
+        self.reset_info = info
+        
+        self.last_observation = observation
+
+        self.last_done = False
+
+        self.last_truncation = False
+
+        self.last_info = self.reset_info
+
+        self.last_reward = 0
     
     def reset(self):
 
-        '''Resets the environment, with an optinal seed'''        
-
+        '''Resets the environment, with an optinal seed'''    
 
         observation, info = self.env.reset()
         
         observation = normalize_observation(observation)
 
-        self.reset_info = info
-        
-        self.last_observation = observation
+        self._reset_internal_values(observation, info)
             
         return observation
 
@@ -120,9 +132,8 @@ class AECGymnasiumEnvironmentWrapper(AECEnvironmentComponent, SeededComponent, S
         observation, info = self.env.reset(seed=self.seed)
         
         observation = normalize_observation(observation)
-        self.reset_info = info
         
-        self.last_observation = observation
+        self._reset_internal_values(observation, info)
             
         return observation
     
@@ -139,6 +150,9 @@ class AECGymnasiumEnvironmentWrapper(AECEnvironmentComponent, SeededComponent, S
 
 
     def step(self, action):
+
+        if action is None: # TODO: This is an hotfix given the mismatch of how multi agent systems and singe agent systems work together
+            return 
         
         if isinstance(action, torch.Tensor):
             action = action.cpu().numpy()

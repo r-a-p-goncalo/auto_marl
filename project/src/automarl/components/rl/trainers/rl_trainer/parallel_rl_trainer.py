@@ -1,5 +1,5 @@
 
-from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
+from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 
 from automarl.components.rl.environment.parallel_environment import ParallelEnvironmentComponent
 from automarl.core.input_management import ParameterSignature

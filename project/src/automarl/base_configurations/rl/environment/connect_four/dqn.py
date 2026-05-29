@@ -4,19 +4,19 @@ from automarl.components.ml.optimizers.optimizer_components import AdamOptimizer
 from automarl.components.ml.models.neural_model import FullyConnectedModelSchema
 
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
-from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component import AgentTrainer
 
 from automarl.components.fundamentals.translator.tensor_translator import ToTorchTranslator
 from automarl.components.rl.evaluators.rl_std_avg_evaluator import LastValuesAvgStdEvaluator
 
-from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
+from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 from automarl.components.rl.environment.pettingzoo.aec_pettingzoo_env import AECPettingZooEnvironmentWrapper
 from automarl.components.rl.evaluators.rl_vs_agents_evaluator import AgentVsAgentsWithPolicy
 from automarl.components.rl.rl_player.rl_player import RLPlayer
 from automarl.components.rl.policy.random_policy import RandomPolicyMasked
 from automarl.components.rl.evaluators.rl_agent_iter_evaluator import RLAgentIterEvaluator
 from automarl.components.rl.policy.qpolicy import MaskedQPolicy
-from automarl.components.rl.trainers.agent_trainer_component_dqn import AgentTrainerDQN
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component_dqn import AgentTrainerDQN
 from automarl.components.rl.learners.q_learner import DeepQLearnerSchema, DoubleDeepQLearnerSchema
 from automarl.components.rl.exploration.epsilong_greedy import EpsilonGreedyStepDecayStrategy
 

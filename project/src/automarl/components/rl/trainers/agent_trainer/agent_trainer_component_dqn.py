@@ -2,7 +2,7 @@ from automarl.component import requires_input_process
 from automarl.core.advanced_input_management import ComponentParameterSignature
 
 from automarl.components.rl.exploration.exploration_strategy import ExplorationStrategySchema
-from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component import AgentTrainer
 
 from automarl.components.rl.learners.q_learner import DeepQLearnerSchema
 import torch

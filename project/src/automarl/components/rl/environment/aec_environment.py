@@ -5,11 +5,14 @@ from automarl.component import requires_input_process
 
 from abc import abstractmethod
 
+from automarl.components.rl.environment.environment_type import EnvironmentType
+
 class AECEnvironmentComponent(EnvironmentComponent):
     
     parameters_signature =  {} 
     
-
+    def get_environment_type(self) -> EnvironmentType:
+        return EnvironmentType.AEC
         
     @requires_input_process   
     def observe(self, agent_name : str):

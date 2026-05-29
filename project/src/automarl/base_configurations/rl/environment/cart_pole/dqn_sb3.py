@@ -37,9 +37,9 @@ from automarl.components.rl.exploration.epsilong_greedy import EpsilonGreedyLine
 from automarl.components.rl.learners.q_learner import DeepQLearnerSchema
 from automarl.components.rl.policy.qpolicy import QPolicy
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
-from automarl.components.rl.trainers.agent_trainer_component_dqn import AgentTrainerDQN
-from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component_dqn import AgentTrainerDQN
 from automarl.components.fundamentals.translator.tensor_translator import ToTorchTranslator
+from automarl.components.rl.trainers.rl_trainer.single_rl_trainer import SingleRLTrainer
 
 
 def config_dict():
@@ -67,7 +67,7 @@ def config_dict():
             "state_translator" : (ToTorchTranslator, {})
         },
         
-        "rl_trainer" : (RLTrainerComponent,
+        "rl_trainer" : (SingleRLTrainer,
             
             {
             "limit_total_steps" : 5e4,

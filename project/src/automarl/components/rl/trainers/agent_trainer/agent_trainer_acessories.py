@@ -8,7 +8,7 @@ from automarl.components.fundamentals.acessories import AcessoryComponent
 from automarl.components.loggers.logger_component import ComponentWithLogging
 from automarl.components.loggers.result_logger import ResultLogger
 from automarl.components.rl.learners.learner_component import LearnerSchema
-from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component import AgentTrainer
 import torch
 
 

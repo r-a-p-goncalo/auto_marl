@@ -2,7 +2,7 @@
 
 
 from automarl.components.loggers.debug.component_with_logging_debug import ComponentDebug
-from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component import AgentTrainer
 from automarl.components.ml.models.torch_model_components import TorchModelComponent
 from automarl.core.input_management import ParameterSignature
 from automarl.components.ml.models.torch_model_utils import model_parameter_distance
@@ -60,6 +60,7 @@ class AgentTrainerDebug(AgentTrainer, ComponentDebug):
             super().do_after_training_step(i_episode, action, prev_state, next_state, reward, done, truncated)
 
             self.lg.writeLine(f"After training step: {self.values['total_steps']}, {self.values['episodes_done']}, {self.values['episode_steps']}: {reward}, {done}", file="training_steps.txt")
+
 
         def optimizeAgent(self):
             

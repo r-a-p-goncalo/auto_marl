@@ -6,7 +6,7 @@ from automarl.components.ml.memory.torch_memory_component import TorchMemoryComp
 from automarl.components.ml.memory.memory_components import MemoryComponent
 from automarl.components.ml.memory.memory_samplers.memory_sampler import MemorySampler
 from automarl.components.ml.memory.memory_samplers.advantages_calc_sampler import PPOAdvantagesCalcSampler
-from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
+from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 
 
 class RLTrainerOrquestrator(RLTrainerComponent):

@@ -9,9 +9,9 @@ from automarl.components.rl.learners.ppo_learner import PPOLearner
 
 from automarl.components.rl.environment.pettingzoo.pettingzoo_env import PettingZooEnvironmentWrapper
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
-from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer
-from automarl.components.rl.trainers.agent_trainer_ppo import AgentTrainerPPO
-from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component import AgentTrainer
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_ppo import AgentTrainerPPO
+from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 
 
 def config_dict(num_episodes=200):

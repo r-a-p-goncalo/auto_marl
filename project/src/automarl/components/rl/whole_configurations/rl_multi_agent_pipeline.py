@@ -10,8 +10,8 @@ from automarl.components.rl.learners.q_learner import DeepQLearnerSchema
 from automarl.components.rl.policy.qpolicy import QPolicy
 
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
-from automarl.components.rl.trainers.agent_trainer_component_dqn import AgentTrainerDQN
-from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component_dqn import AgentTrainerDQN
+from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 from automarl.components.rl.environment.pettingzoo.parallel_petting_zoo_env import PettingZooEnvironmentWrapperParallel
 from automarl.components.rl.trainers.rl_trainer.parallel_rl_trainer import RLTrainerComponentParallel
 from automarl.components.fundamentals.translator.torch_image_state_translator import ImageReverterToSingleChannel, ImageNormalizer

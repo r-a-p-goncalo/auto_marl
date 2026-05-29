@@ -10,7 +10,7 @@ from automarl.components.ml.memory.memory_components import MemoryComponent
 from automarl.components.rl.agent.agent_components import AgentSchema
 from automarl.components.ml.optimizers.optimizer_components import AdamOptimizer
 from automarl.components.rl.exploration.epsilong_greedy import EpsilonGreedyStrategy
-from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
+from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 from automarl.components.rl.environment.environment_components import AECEnvironmentComponent
 from automarl.components.rl.environment.pettingzoo.pettingzoo_env import PettingZooEnvironmentWrapper
 from automarl.utils.files_utils import open_or_create_folder

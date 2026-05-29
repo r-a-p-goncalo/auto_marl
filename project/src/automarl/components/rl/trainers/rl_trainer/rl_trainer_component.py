@@ -5,7 +5,7 @@ from automarl.component import ParameterSignature, requires_input_process
 from automarl.core.advanced_input_management import ComponentDictParameterSignature
 from automarl.components.loggers.component_with_results import ComponentWithResults
 from automarl.components.rl.agent.agent_components import AgentSchema
-from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component import AgentTrainer
 from automarl.components.rl.environment.aec_environment import AECEnvironmentComponent
 
 from automarl.components.loggers.logger_component import ComponentWithLogging
@@ -394,18 +394,20 @@ class RLTrainerComponent(ComponentWithLogging, ComponentWithResults, ExecCompone
 
         return done, truncated
             
+    def _do_environment_agent_interaction_loop(self, i_episode):
 
-    
-    def run_single_episode(self, i_episode):
-                        
-        self.setup_single_episode(i_episode)
-                
         for agent_name in self.env.agent_iter(): #iterates infinitely over the agents that should be acting in the environment
 
             done, truncated = self.run_episode_step_for_agent_name(i_episode, agent_name)
                       
             if self._check_if_to_end_episode():
-                break                      
+                break  
+    
+    def run_single_episode(self, i_episode):
+                        
+        self.setup_single_episode(i_episode)
+                
+        self._do_environment_agent_interaction_loop(i_episode)                    
 
         for agent_in_training in self.agents_trainers.values():
             agent_in_training.end_episode(

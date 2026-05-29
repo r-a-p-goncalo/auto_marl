@@ -1,7 +1,7 @@
 import copy
 from automarl.components.rl.policy.policy import Policy
 from automarl.components.ml.models.torch_model_components import TorchModelComponent
-from automarl.components.rl.trainers.rl_trainer_component import RLTrainerComponent
+from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 import torch
 
 from automarl.component import ParameterSignature

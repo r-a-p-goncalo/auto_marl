@@ -1,6 +1,6 @@
 from automarl.components.ml.memory.memory_samplers.advantages_calc_sampler import PPOAdvantagesCalcSampler
 from automarl.components.rl.policy.stochastic_policy import StochasticPolicy
-from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component import AgentTrainer
 
 from automarl.components.rl.learners.ppo_learner import PPOLearner
 from automarl.core.advanced_input_management import ComponentParameterSignature

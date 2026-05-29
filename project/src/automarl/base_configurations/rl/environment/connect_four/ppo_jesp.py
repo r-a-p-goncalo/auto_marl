@@ -6,8 +6,8 @@ from automarl.components.ml.models.neural_model import FullyConnectedModelSchema
 from automarl.components.rl.learners.ppo_learner import PPOLearner
 
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
-from automarl.components.rl.trainers.agent_trainer_component import AgentTrainer
-from automarl.components.rl.trainers.agent_trainer_ppo import AgentTrainerPPO
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_component import AgentTrainer
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_ppo import AgentTrainerPPO
 
 from automarl.components.fundamentals.translator.tensor_translator import ToTorchTranslator
 from automarl.components.rl.evaluators.rl_std_avg_evaluator import LastValuesAvgStdEvaluator

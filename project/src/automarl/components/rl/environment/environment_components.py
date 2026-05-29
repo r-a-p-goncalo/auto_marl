@@ -4,6 +4,8 @@ from automarl.core.advanced_input_management import ComponentListParameterSignat
 from automarl.components.basic_components.sampler import Sampler
 from abc import abstractmethod
 
+from automarl.components.rl.environment.environment_type import EnvironmentType
+
 
 def normalize_observation(raw_obs):
         
@@ -94,6 +96,11 @@ class EnvironmentComponent(Component):
     def get_agent_state_space(self, agent):
         '''returns the state space for the environment'''
         pass
+
+    @requires_input_process
+    @abstractmethod
+    def get_environment_type(self) -> EnvironmentType:
+        '''returns the environment type'''
 
 
 

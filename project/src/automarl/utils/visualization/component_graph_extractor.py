@@ -2,6 +2,7 @@ from automarl.component import Component
 from automarl.utils.visualization.component_graph import Graph
 from automarl.utils.visualization.component_graph import GraphNode
 from automarl.utils.visualization.component_graph import GraphEdge
+from automarl.components.loggers.logger_component import LoggerSchema
 
 
 class ComponentGraphExtractor:
@@ -16,6 +17,8 @@ class ComponentGraphExtractor:
         ignore_default_values: bool = True,
         ignore_non_serializable: bool = True,
         max_value_length: int = 120,
+        classes_to_ignore=(LoggerSchema),
+        input_keys_to_ignore=["artifact_relative_directory", "base_directory", "create_directory", "device", "render_mode"]
     ):
 
         self.include_inputs = include_inputs
@@ -25,6 +28,9 @@ class ComponentGraphExtractor:
         self.ignore_non_serializable = ignore_non_serializable
 
         self.max_value_length = max_value_length
+
+        self._classes_to_ignore = classes_to_ignore
+        self._input_keys_to_ignore = input_keys_to_ignore
 
         self._component_to_id = {}
 
@@ -44,6 +50,9 @@ class ComponentGraphExtractor:
         input_meta = component.get_input_meta()
 
         for key, value in component.input.items():
+
+            if key in self._input_keys_to_ignore:
+                continue
 
             parameter_signature = component.get_parameter_signature(key)
 
@@ -119,6 +128,7 @@ class ComponentGraphExtractor:
 
 
     def _visit(self, component, graph: Graph, visited: set[int]):
+
         cid = id(component)
 
         node_id = self._get_id(component)
@@ -140,6 +150,10 @@ class ComponentGraphExtractor:
         visited.add(cid)
 
         for child in getattr(component, "child_components", []):
+
+            if isinstance(child, self._classes_to_ignore):
+                continue
+                    
             child_id = self._get_id(child)
 
             graph.add_edge(GraphEdge(

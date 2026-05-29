@@ -1,5 +1,8 @@
 import importlib
 import os
+import pkgutil
+
+from automarl.components.loggers.global_logger import globalWriteLine
 
 def get_class_from(class_definition) -> type:
     
@@ -46,12 +49,45 @@ def get_class_from_string(class_string: str):
         return getattr(module, class_name)
     
     except (ImportError, AttributeError) as e:
-        raise ImportError(f"Unable to locate module '{module_name}' in class '{class_string}': {e}")
+
+        # fallback: try to find class only by its name inside the package tree
+        base_package = module_parts[0] if module_parts else module_name
+
+        found = _find_class_by_name_in_package(class_name, base_package)
+
+        if found is not None:
+            globalWriteLine(f"WARNING: Had to find class from {class_string}, with name '{class_name}' using a dynamic search, value found was: {found}")
+            return found
+
+        raise ImportError(f"Unable to locate module '{module_name}' in class '{class_string}': {e}") from e
     
     except Exception as e:
         raise Exception(f"Problem when getting class with string {class_string}: {e}")
     
         
+def _find_class_by_name_in_package(class_name: str, base_package: str):
+
+    try:
+        package = importlib.import_module(base_package)
+    except ImportError:
+        return None
+
+    if not hasattr(package, "__path__"):
+        return None
+
+    for _, modname, _ in pkgutil.walk_packages(package.__path__, package.__name__ + "."):
+        try:
+            mod = importlib.import_module(modname)
+        except Exception:
+            continue
+
+        if hasattr(mod, class_name):
+            candidate = getattr(mod, class_name)
+            if isinstance(candidate, type):
+                return candidate
+
+    return None
+
 def super_class_from_list_of_class(list_of_superclasses : list[type], class_to_look_for : type) -> type:
 
     for super_class in list_of_superclasses:

@@ -83,6 +83,8 @@ class AgentTrainerPPO(AgentTrainer):
 
     def _gen_to_push(self, prev_state, next_state, action, reward, done, truncated):
 
+        to_push = super()._gen_to_push(prev_state, next_state, action, reward, done, truncated)
+
         prev_state_in_agent = {**prev_state}
         prev_state_in_agent.pop("observation")
 
@@ -92,9 +94,10 @@ class AgentTrainerPPO(AgentTrainer):
         
         action_val_to_store = self.last_action_val.squeeze(0) if torch.is_tensor(self.last_action_val) and self.last_action_val.dim() > 1 and self.last_action_val.shape[0] == 1 else self.last_action_val
 
-        return {"observation" : prev_state["observation"], 
+        return {**to_push,
+                            "observation" : prev_state["observation"], 
                               "action" : action, 
-                              "next_observation" : next_state, 
+                              "next_observation" : next_state["observation"], 
                               "reward" : reward, 
                               "log_prob" : self.last_log_prob, 
                               "done" : done,
@@ -103,15 +106,6 @@ class AgentTrainerPPO(AgentTrainer):
                               **prev_state_in_agent
                               }
 
-
-    def _observe_transition_to(self, prev_state, next_state, action, reward, done, truncated, **kwargs):
-        
-        '''Makes agent observe and remember a transiction from its (current) a state to another'''
-        
-        transition_to_push = self._gen_to_push(prev_state, next_state, action, reward, done, truncated, **kwargs)
-
-        #we can push in this way because the pushed tensors are actually cloned into memory
-        self.push_to_memory(transition_to_push)
                
         
     def select_action(self, state):

@@ -30,8 +30,7 @@ from automarl.components.fundamentals.translator.tensor_translator import ToTorc
 from automarl.components.ml.models.neural_model import FullyConnectedModelSchema
 from automarl.components.rl.environment.gymnasium.aec_gymnasium_env import AECGymnasiumEnvironmentWrapper
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
-from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
-from automarl.components.rl.policy.stochastic_policy import StochasticPolicy
+from automarl.components.rl.policy.stochastic_policy import CategoricalStochasticPolicy
 from automarl.components.rl.trainers.agent_trainer.agent_trainer_ppo import AgentTrainerPPO
 from automarl.components.rl.learners.ppo_learner import PPOLearner
 from automarl.components.ml.optimizers.optimizer_components import AdamOptimizer
@@ -40,6 +39,7 @@ from automarl.components.basic_components.dynamic_value import DynamicLinearValu
 from automarl.components.ml.memory.torch_memory_component import TorchMemoryComponent
 
 from automarl.components.ml.models.model_initialization_strategy import TorchModelInitializationStrategyOrthogonal
+from automarl.components.rl.trainers.rl_trainer.single_rl_trainer import SingleRLTrainer
 
 def config_dict():
 
@@ -52,7 +52,7 @@ def config_dict():
         "environment": (AECGymnasiumEnvironmentWrapper, {"environment" : "CartPole-v1"}),
         "agents_input": {
 
-            "policy" : ( StochasticPolicy,
+            "policy" : ( CategoricalStochasticPolicy,
                         {
                         "model" : (
                             FullyConnectedModelSchema, 
@@ -68,7 +68,7 @@ def config_dict():
             "state_translator" : (ToTorchTranslator, {})
         },
         
-        "rl_trainer" : (RLTrainerComponent,
+        "rl_trainer" : (SingleRLTrainer,
             
             {
             "name" : "RLTrainerComponent",

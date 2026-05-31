@@ -83,11 +83,15 @@ class AgentTrainerDQN(AgentTrainer):
         
         if self.exploration_strategy is not None:
             self.lg.writeLine(f"Exploration strategy values: \n{self.exploration_strategy.values}\n")
-        
 
-    def _observe_transition_to(self, prev_state, new_state, action, reward, done, truncated):
         
-        '''Makes agent observe and remember a transiction from its (current) a state to another'''
+    def _gen_to_push(self, prev_state, next_state, action, reward, done, truncated):
+
+        '''
+        Gens the transition that is to be pushed into memory
+        '''
+
+        to_push = super()._gen_to_push(prev_state, next_state, action, reward, done, truncated)
 
         prev_state_in_agent = {**prev_state}
         prev_state_in_agent.pop("observation")
@@ -96,7 +100,7 @@ class AgentTrainerDQN(AgentTrainer):
             if not isinstance(v, torch.Tensor):
                 prev_state_in_agent[k] = torch.tensor(v, dtype=torch.float32, device=self.device)
         
-        next_state_in_agent = {**new_state}
+        next_state_in_agent = {**next_state}
         next_state_in_agent.pop("observation")
 
         processed_next_state_in_agent = {}
@@ -106,13 +110,14 @@ class AgentTrainerDQN(AgentTrainer):
                 processed_next_state_in_agent[f"next_{k}"] = torch.tensor(v, dtype=torch.float32, device=self.device)
 
                 
-        self.push_to_memory({"observation" : prev_state["observation"], 
+        return {**to_push,
+                          "observation" : prev_state["observation"], 
                           "action" : action, 
-                          "next_observation" : new_state["observation"], 
+                          "next_observation" : next_state["observation"], 
                           "reward" : reward, 
                           "done" : done,
                           **prev_state_in_agent,
-                          **processed_next_state_in_agent})
+                          **processed_next_state_in_agent}
         
 
         

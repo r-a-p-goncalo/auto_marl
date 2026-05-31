@@ -157,9 +157,6 @@ class CategoricalStochasticPolicy(StochasticPolicy):
         if action_val.dim() > 0 and action_val.shape[-1] == 1:
             action_val = action_val
 
-        if action_val.dim() > 1:
-            raise ValueError(f"Categorical action_val must be scalar, [B], or [B,1], got shape {tuple(action_val.shape)}")
-
         return action_val
     
     def reduce_log_prob(self, log_prob: torch.Tensor) -> torch.Tensor:

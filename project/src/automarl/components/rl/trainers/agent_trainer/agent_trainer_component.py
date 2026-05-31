@@ -476,7 +476,24 @@ class AgentTrainer(ComponentWithLogging, ComponentWithResults, EventfulComponent
 
         self._learn_if_needed() # uses the learning strategy to learn if it verifies the conditions to do so
                 
+
+    def _gen_to_push(self, prev_state, next_state, action, reward, done, truncated):
+
+        '''
+        Gens the transition that is to be pushed into memory
+        '''
+
+        return {} # this is for subclasses to complete
         
+    def _observe_transition_to(self, prev_state, next_state, action, reward, done, truncated, **kwargs):
+        
+        '''Makes agent observe and remember a transition from its (current) a state to another'''
+        
+        transition_to_push = self._gen_to_push(prev_state, next_state, action, reward, done, truncated, **kwargs)
+
+        #we can push in this way because the pushed tensors are actually cloned into memory
+        self.push_to_memory(transition_to_push)
+
 
     def observe_transition_to(self, prev_state=None, new_state=None, action=None, reward=None, done=None, truncated=None, **kwargs):
         
@@ -517,9 +534,6 @@ class AgentTrainer(ComponentWithLogging, ComponentWithResults, EventfulComponent
         return self._observe_transition_to(prev_state, new_state, action, reward, done, truncated, **kwargs)
     
 
-    def _observe_transition_to(self, prev_state, new_state, action, reward, done, truncated, **kwargs):
-        pass
-    
     def push_to_memory(self, to_push):
         self.memory.push(to_push) 
 

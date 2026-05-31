@@ -403,7 +403,7 @@ class ResultLogger(LoggerSchema):
             values = values[x_slice_range[0]:max(x_slice_range[1], len(x_values))]
 
         if aggregate_number is not None:
-            x_values, mean_values, std_values = aggregate_series(values, aggregate_number, show_std)
+            mean_values, std_values, x_values = aggregate_series(values, aggregate_number, show_std)
 
         else: # aggregate number is None
             mean_values = values

@@ -560,6 +560,9 @@ class RLPipelineComponent(ExecComponent, StatefulComponent, ComponentWithEvaluat
     def get_env(self):
         return self.env
         
+    @requires_input_process
+    def get_rl_trainer(self):
+        return self.rl_trainer
     # RESULTS --------------------------------------
     
     @requires_input_process

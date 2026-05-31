@@ -58,13 +58,14 @@ class QLearnerDebug(LearnerDebug, QLearnerSchema):
         '''
 
         done_batch = interpreted_trajectory["done"]
+        batch_size = len(done_batch)
 
         next_state_q_values, next_state_v_values = super()._apply_value_prediction_to_next_state(interpreted_trajectory)
 
         if self.__path_to_write is not None:
             self.lg.writeLine(f"\nComputed done, next_state_values computed by target and q value of action chosen:\n", file=self.__path_to_write, use_time_stamp=False)
 
-            for i in range(self.batch_size):
+            for i in range(batch_size):
                 self.lg.writeLine(f"{i}: {done_batch[i]}, {next_state_q_values[i]} -> {next_state_v_values[i]}", file=self.__path_to_write, use_time_stamp=False)
 
 
@@ -100,7 +101,7 @@ class QLearnerDebug(LearnerDebug, QLearnerSchema):
 
     def _learn(self, trajectory) -> None:
 
-        if self.interval_beetwenn_computation_writes % self.__current_interval_computation_count == 0:
+        if self.__current_interval_computation_count % self.interval_beetwenn_computation_writes  == 0:
             self.__path_to_write = self.lg.new_relative_path_if_exists("computation.txt", dir="learning")
         
         else:

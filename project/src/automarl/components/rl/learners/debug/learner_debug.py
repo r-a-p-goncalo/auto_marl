@@ -34,7 +34,7 @@ class LearnerDebug(LearnerSchema, ComponentDebug):
         else:
             self.lg.writeLine(f"Will not compare old and new model predictions")
 
-
+    @requires_input_process
     def learn(self, trajectory) -> None:
         
         self.lg.writeLine(f"Learning {self.optimizations_per_learn} timess...")

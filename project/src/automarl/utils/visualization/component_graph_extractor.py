@@ -16,7 +16,7 @@ class ComponentGraphExtractor:
         include_inputs: bool = True,
         ignore_default_values: bool = True,
         ignore_non_serializable: bool = True,
-        max_value_length: int = 120,
+        max_value_length: int = 15,
         classes_to_ignore=(LoggerSchema),
         input_keys_to_ignore=["artifact_relative_directory", "base_directory", "create_directory", "device", "render_mode"]
     ):
@@ -43,6 +43,26 @@ class ComponentGraphExtractor:
             return component.name
 
         return type(component).__name__
+    
+
+    def _check_and_add_edge(self, component : Component, target : Component, graph : Graph, label = None):
+                
+                if isinstance(target, self._classes_to_ignore):
+                    return False
+
+                if target in component.child_components:
+                    return False
+
+                graph.add_edge(
+                    GraphEdge(
+                        source=self._get_id(component),
+                        target=self._get_id(target),
+                        edge_type=GraphEdge.REFERENCE_TYPE,
+                        label=label                    
+                    )
+                )        
+
+                return True
 
     def _extract_attributes(
         self,
@@ -74,25 +94,26 @@ class ComponentGraphExtractor:
                 continue
 
             if isinstance(value, Component):
-
-                if isinstance(value, self._classes_to_ignore):
-                    continue
-
-                if value in component.child_components:
-                    continue
-
-                graph.add_edge(
-                    GraphEdge(
-                        source=self._get_id(component),
-                        target=self._get_id(value),
-                        edge_type=GraphEdge.REFERENCE_TYPE                       
-                    )
-                )
+                self._check_and_add_edge(component, value, graph, key)
+                continue # we don't serialize components
 
             if isinstance(value, list):
 
                 if len(value) > 0 and isinstance(value[0], Component):
+                    
+                    for i in range(len(value)):
+
+                        self._check_and_add_edge(component, v, graph, label=f"{key}[{i}]")
+
                     continue
+
+            if isinstance(value, dict):
+
+                if len(value) > 0:
+                    for k, v in value.items():
+                        if isinstance(v, Component):
+                            self._check_and_add_edge(component, v, graph, label=f"{key}['{k}']")
+
 
             attributes[key] = self._serialize_value(value)
 
@@ -105,7 +126,12 @@ class ComponentGraphExtractor:
     
         if isinstance(value, (int, float, bool)):
             return str(value)
-    
+        
+        value_str = str(value)
+
+        if len(value_str) <= self.max_value_length:
+            return value
+        
         if isinstance(value, str):
         
             if len(value) > self.max_value_length:
@@ -114,6 +140,7 @@ class ComponentGraphExtractor:
             return value
     
         if isinstance(value, list):
+
             return f"list[{len(value)}]"
     
         if isinstance(value, tuple):

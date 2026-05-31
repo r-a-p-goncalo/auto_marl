@@ -63,7 +63,7 @@ class QLearnerDebug(LearnerDebug, QLearnerSchema):
         next_state_q_values, next_state_v_values = super()._apply_value_prediction_to_next_state(interpreted_trajectory)
 
         if self.__path_to_write is not None:
-            self.lg.writeLine(f"\nComputed done, next_state_values computed by target and q value of action chosen:\n", file=self.__path_to_write, use_time_stamp=False)
+            self.lg.writeLine(f"\ndone ({done_batch.shape}), next_state_values ({next_state_q_values.shape}) -> max_next_state_q_value ({next_state_v_values.shape}):\n", file=self.__path_to_write, use_time_stamp=False)
 
             for i in range(batch_size):
                 self.lg.writeLine(f"{i}: {done_batch[i]}, {next_state_q_values[i]} -> {next_state_v_values[i]}", file=self.__path_to_write, use_time_stamp=False)

@@ -255,9 +255,10 @@ class DeepQLearnerSchema(QLearnerSchema):
 
         with torch.no_grad():
             next_state_q_values = self.target_policy.predict_model_output(next_state_batch) # it returns the maximum q-action values of the next action
-            
-            next_state_v_values = next_state_q_values.max(1).values
-            next_state_v_values = next_state_v_values * (1 - done_batch)
+            print(f"Next state q values shape: {next_state_q_values.shape}")
+            # these are the max values of the q values of the next action, representing the action that would be chosen
+            next_state_v_values = next_state_q_values.max(dim=1, keepdim=True).values
+            next_state_v_values = next_state_v_values * (1 - done_batch) # they are ignored when there is no next state
 
         return next_state_q_values, next_state_v_values
     

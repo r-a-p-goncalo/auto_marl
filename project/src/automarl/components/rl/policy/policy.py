@@ -135,16 +135,25 @@ class Policy(PolicyInterface, ComponentWithLogging):
     
     @requires_input_process
     def get_action_val_shape(self):
+        '''
+        Returns the shape of the action value, what is used to internally represent the action
+        '''
         return self.output_action_shape
 
 
     @requires_input_process 
     def get_action_from_action_val(self, action_val):
+        '''
+        Returns the action chosen from the internal action value
+        '''
         return action_val
     
 
     @requires_input_process
     def get_action_val_from_model_output(self, model_output, state):
+        '''
+        Gets the computed action value from the internal model's output
+        '''
         return model_output
 
 

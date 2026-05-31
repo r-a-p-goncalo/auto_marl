@@ -21,8 +21,6 @@ class SingleRLTrainer(RLTrainerComponent):
 
             _, reward, done, truncated, _ = self.env.last()
 
-            print(f"Reward: {reward}, Done: {done}, Truncated: {truncated}")
-
             self.after_environment_step(reward)
 
             if self._check_if_to_end_episode():

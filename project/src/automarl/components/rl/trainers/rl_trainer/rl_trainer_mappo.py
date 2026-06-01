@@ -180,12 +180,9 @@ class RLTrainerMAPPO(RLTrainerOrquestrator, RLTrainerComponentParallel):
             idx = self.agent_to_idx[agent_name]
             agent_trainer = self.agents_trainers[agent_name]
 
+
             agent_trainer.observe_transition_to(
-                new_state=torch.tensor(
-                    observations[agent_name]["observation"],
-                    dtype=torch.float32,
-                    device=self.device
-                ),
+                new_state=observations[agent_name],
                 action=actions[agent_name],
                 reward=rewards[agent_name],
                 done=dones[agent_name],

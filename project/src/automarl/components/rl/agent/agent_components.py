@@ -221,8 +221,14 @@ class AgentSchema(ComponentWithLogging, StatefulComponent):
              
 
     @requires_input_process 
+    def get_internal_agent_observation_with_new(self, new_observation):
+        '''Gets the agent's internal state observation taking into account a new state received by the environment'''
+        return self.process_env_state(new_observation)
+    
+
+    @requires_input_process 
     def get_internal_agent_state_with_new(self, new_state):
         '''Gets the agent's internal state taking into account a new state received by the environment'''
-        return new_state
+        return {**new_state, "observation" : self.get_internal_agent_observation_with_new(new_state["observation"])}
         
 

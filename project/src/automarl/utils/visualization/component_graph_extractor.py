@@ -103,9 +103,9 @@ class ComponentGraphExtractor:
                     
                     for i in range(len(value)):
 
-                        self._check_and_add_edge(component, v, graph, label=f"{key}[{i}]")
-
-                    continue
+                        v = value[i]
+                        if isinstance(v, Component):
+                            self._check_and_add_edge(component, v, graph, label=f"{key}[{i}]")
 
             if isinstance(value, dict):
 

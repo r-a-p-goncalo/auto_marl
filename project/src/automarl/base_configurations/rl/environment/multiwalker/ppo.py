@@ -210,7 +210,7 @@ def config_dict():
             {
                 "number_of_episodes" : 5,
                 "rl_player_definition" : (RLParallelPlayer, {}),
-                "base_evaluator" : (LastValuesAvgStdEvaluator, {"value_to_use" : "total_reward"})
+                "base_evaluator" : (LastValuesAvgStdEvaluator, {"value_to_use" : "episode_reward"})
             }
         )
 

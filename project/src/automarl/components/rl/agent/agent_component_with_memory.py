@@ -70,9 +70,8 @@ class AgentSchemaWithStateMemory(AgentSchema):
         Note that this does not observe the transition
         '''
                 
-        state = {**state}
-        new_obs = self.process_env_state(state["observation"])
-        state["observation"] = self.get_internal_agent_state_with_new(new_obs)
+        state = self.get_internal_agent_state_with_new(state)
+        
         return self.policy.predict(state)
     
     @requires_input_process
@@ -110,11 +109,13 @@ class AgentSchemaWithStateMemory(AgentSchema):
         new_state = {**new_state}
         new_obs = self.process_env_state(new_state.pop("observation"))
 
-        self.state_memory["observation"].copy_(self.get_internal_agent_state_with_new(new_obs))
+        self.state_memory["observation"].copy_(self.get_internal_agent_observation_with_new(new_obs))
         self.state_memory.update(new_state)
         
+
        
-    def get_internal_agent_state_with_new(self, new_state):
+    @requires_input_process 
+    def get_internal_agent_observation_with_new(self, new_observation):
         '''
         Returns a new state memory tensor with the new_state added,
         shifting the previous states to the left.
@@ -127,7 +128,7 @@ class AgentSchemaWithStateMemory(AgentSchema):
             self.temp_cache_state_memory[:-1].copy_(self.state_memory["observation"][1:]) #note that this strategy does not work well with autograd, as this can be changed after it was used to compute a tensor
     
             # insert new state into the last position
-            self.temp_cache_state_memory[-1].copy_(new_state)
+            self.temp_cache_state_memory[-1].copy_(self.process_env_state(new_observation))
         
         return self.temp_cache_state_memory
     

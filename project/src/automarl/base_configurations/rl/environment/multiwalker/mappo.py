@@ -34,7 +34,10 @@ def config_dict():
         "environment": (
             PettingZooEnvironmentWrapperParallel,
             {
-                "environment": "multiwalker"
+                "environment": "multiwalker",
+            "environment_input": {
+                "remove_on_fall": False
+            }
             }
         ),
 

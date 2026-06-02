@@ -94,39 +94,15 @@ class RLPlayer(ExecComponent, ComponentWithLogging, ComponentWithResults, Statef
 
 
     def _run_episode(self):
-        
-        for agent_name in self.env.agent_iter():
-            
-            reward, done, truncated = self._do_agent_step(agent_name)
-            
-            #for other_agent_name in self.agents.keys(): #make the other agents observe the transiction without remembering it
-            #    if other_agent_name != agent_name:
-            #        self.agents[other_agent_name].update_state_memory(self.env.observe(other_agent_name))
-                            
+        '''
+        Internal function that runs the the current episode
+        '''  
 
             
     def _do_agent_step(self, agent_name):
-        
-        agent : AgentSchema = self.agents[agent_name]
-        
-        observation, reward, done, truncated, info = self.env.last()
-        agent.update_state_memory(observation)
-
-        if done or truncated:
-            self.env.step(None)
-        else:
-            action = agent.policy_predict_with_memory()
-            self.env.step(action)
-                        
-        self.values["episode_score"] = self.values["episode_score"] + reward
-                      
-        self.values["episode_steps"] = self.values["episode_steps"] + 1
-        self.values["total_steps"] = self.values["total_steps"] + 1 #we just did a step
-
-        self.values["agents_episode_score"][agent_name] += reward
-
-        
-        return reward, done, truncated
+       '''
+        Internal function that makes an agent act
+        '''  
     
     
     @requires_input_process

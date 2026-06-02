@@ -16,6 +16,9 @@ from automarl.components.rl.learners.ppo_learner import PPOLearner
 from automarl.components.rl.environment.gymnasium.aec_gymnasium_env import AECGymnasiumEnvironmentWrapper
 from automarl.components.rl.trainers.rl_trainer.single_rl_trainer import SingleRLTrainer
 from automarl.components.fundamentals.translator.tensor_translator import ToTorchTranslator
+from automarl.components.rl.evaluators.rl_evaluator_player import EvaluatorWithPlayer
+from automarl.components.rl.evaluators.rl_std_avg_evaluator import LastValuesAvgStdEvaluator
+from automarl.components.rl.rl_player.rl_single_player import RLSinglePlayer
 
 
 def config_dict():
@@ -44,7 +47,7 @@ def config_dict():
                         "model": (
                             FullyConnectedModelSchema,
                             {
-                                "layers": [256, 256]
+                                "layers": [64,64]
                             }
                         )
                     }
@@ -59,18 +62,21 @@ def config_dict():
                 SingleRLTrainer,
 
                 {
+                    "name": "RLTrainerComponent",
 
-                    "limit_total_steps": 120_000,
+                    "limit_total_steps": 1_000_000,
+
+                    "predict_optimizations_to_do": True,
 
                     "default_trainer_class": AgentTrainerPPO,
 
                     "agents_trainers_input": {
 
-                        "discount_factor": 0.98,
+                        "discount_factor": 0.99,
 
                         "optimization_interval": 2048,
 
-                        "times_to_learn": 10,
+                        "times_to_learn": 4,
 
                         "batch_size": 128,
 
@@ -134,7 +140,17 @@ def config_dict():
 
                 }
 
-            )
+            ),
+
+            "component_evaluator" : (
+            EvaluatorWithPlayer,
+            {
+                "number_of_episodes" : 5,
+                "rl_player_definition" : (RLSinglePlayer, {}),
+                "base_evaluator" : (LastValuesAvgStdEvaluator, {"value_to_use" : "episode_reward"})
+            }
+        )
+
 
         }
 
@@ -163,7 +179,7 @@ def hyperparameter_optimization_input():
         "hyperparameters_range_list" : hyperparameter_suggestions(),
         "hyperparameters_to_optimize" : hyperparameters_to_optimize(),
         "n_trials" : 200,
-        "n_steps" : 40,
+        "n_steps" : 10,
         "eta" : 2,
         "use_best_component_strategy_with_index" : 5,
         "do_initial_evaluation" : True,
@@ -532,7 +548,7 @@ def hyperparameter_suggestions():
         VariableListHyperparameterSuggestion(
             name="network_layers",
             min_len=1,
-            max_len=4,
+            max_len=3,
             hyperparameter_localizations=[
                 [*policy_model_input, "layers"]
             ],
@@ -541,7 +557,7 @@ def hyperparameter_suggestions():
                 value_suggestion=(
                     "cat",
                     {
-                        "choices": [64, 128, 256, 512]
+                        "choices": [64, 128, 256]
                     }
                 )
             )

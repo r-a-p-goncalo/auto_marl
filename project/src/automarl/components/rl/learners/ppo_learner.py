@@ -162,7 +162,7 @@ class PPOLearner(LearnerSchema, ComponentWithLogging):
 
         interpreted_trajectory["log_prob"] = interpret_values(trajectory["log_prob"], self.device).detach()
 
-        interpreted_trajectory["truncation"] = interpret_values(trajectory["log_prob"], self.device).detach()
+        interpreted_trajectory["truncation"] = interpret_values(trajectory["truncation"], self.device).detach()
 
         interpreted_trajectory["action_val"] = interpret_values(trajectory["action_val"], self.device).detach()
 

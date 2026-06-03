@@ -56,6 +56,7 @@ class StochasticPolicy(Policy):
         Subclasses should override when a distribution requires a specific
         action encoding (e.g. categorical indices as int64).
         """
+
         if not torch.is_tensor(action_val):
             device = None
             if hasattr(distribution, "probs") and distribution.probs is not None:
@@ -155,12 +156,18 @@ class CategoricalStochasticPolicy(StochasticPolicy):
             action_val = action_val.long()
 
         if action_val.dim() > 0 and action_val.shape[-1] == 1:
-            action_val = action_val
+            action_val = action_val.squeeze(-1)
 
         return action_val
     
     def reduce_log_prob(self, log_prob: torch.Tensor) -> torch.Tensor:
-        return log_prob # in categorical, the log_prob is assumed to already receive a single value
+        if log_prob.dim() == 0:
+            return log_prob.unsqueeze(0)
+        
+        if log_prob.dim() == 1:
+            return log_prob.unsqueeze(-1)
+        
+        raise RuntimeError(f"Log prob had wrong shape: {log_prob.shape}")
  
     def distribution_from_model_output(self, model_output, state) -> torch.Tensor:
         

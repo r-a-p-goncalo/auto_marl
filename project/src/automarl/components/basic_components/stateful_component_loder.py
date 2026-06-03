@@ -199,10 +199,11 @@ class StatefulComponentLoader(StatefulComponent):
             self.unload_component()
 
 
+
         cmd = [
             sys.executable,
             "-m",
-            "automarl.cli.load_run_component",
+            "automarl.cli.commands.load_run_component",
             "--component_path",
             artifact_dir,
         ]

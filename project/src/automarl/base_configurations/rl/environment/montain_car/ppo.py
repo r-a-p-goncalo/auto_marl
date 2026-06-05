@@ -32,6 +32,8 @@ def config_dict():
 
             "device": "cuda",
 
+            "stop_at_evaluation" : 499.99,
+
             "environment": (
                 AECGymnasiumEnvironmentWrapper,
                 {
@@ -179,8 +181,8 @@ def hyperparameter_optimization_input():
         "hyperparameters_range_list" : hyperparameter_suggestions(),
         "hyperparameters_to_optimize" : hyperparameters_to_optimize(),
         "n_trials" : 200,
-        "n_steps" : 10,
-        "eta" : 2,
+        "steps" : 10,
+        "hyperband_eta" : 2,
         "use_best_component_strategy_with_index" : 5,
         "do_initial_evaluation" : True,
         "pruner" : [OptunaPrunerWrapper, {"optuna_pruner" : "Percentile", "pruner_input" : {"percentile" : 90.0, "n_warmup_steps" : 5}}],

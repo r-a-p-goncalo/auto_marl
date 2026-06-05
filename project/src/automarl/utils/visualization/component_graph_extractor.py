@@ -18,6 +18,7 @@ class ComponentGraphExtractor:
         ignore_non_serializable: bool = True,
         max_value_length: int = 15,
         classes_to_ignore=(LoggerSchema),
+        names_to_ignore=[],
         input_keys_to_ignore=["artifact_relative_directory", "base_directory", "create_directory", "device", "render_mode"]
     ):
 
@@ -30,6 +31,9 @@ class ComponentGraphExtractor:
         self.max_value_length = max_value_length
 
         self._classes_to_ignore = classes_to_ignore
+        
+        self._names_to_ignore = names_to_ignore
+        
         self._input_keys_to_ignore = input_keys_to_ignore
 
         self._component_to_id = {}
@@ -63,6 +67,11 @@ class ComponentGraphExtractor:
                 )        
 
                 return True
+    
+    def is_component_to_process(self, value):
+
+        return isinstance(value, Component) and not isinstance(value, self._classes_to_ignore) and not value.name in self._names_to_ignore
+        
 
     def _extract_attributes(
         self,
@@ -93,7 +102,7 @@ class ComponentGraphExtractor:
             if self.ignore_default_values and not input_meta[key].was_custom_value_passed():
                 continue
 
-            if isinstance(value, Component):
+            if self.is_component_to_process(value):
                 self._check_and_add_edge(component, value, graph, key)
                 continue # we don't serialize components
 
@@ -104,14 +113,14 @@ class ComponentGraphExtractor:
                     for i in range(len(value)):
 
                         v = value[i]
-                        if isinstance(v, Component):
+                        if self.is_component_to_process(v):
                             self._check_and_add_edge(component, v, graph, label=f"{key}[{i}]")
 
             if isinstance(value, dict):
 
                 if len(value) > 0:
                     for k, v in value.items():
-                        if isinstance(v, Component):
+                        if self.is_component_to_process(v):
                             self._check_and_add_edge(component, v, graph, label=f"{key}['{k}']")
 
 
@@ -177,17 +186,19 @@ class ComponentGraphExtractor:
     def _visit_for_child_parent_relations(self, component, graph: Graph, visited: set[int]):
 
         cid = id(component)
-
         node_id = self._get_id(component)
+
 
         if cid in visited:
             return
+
+        
 
         visited.add(cid)
 
         for child in getattr(component, "child_components", []):
 
-            if isinstance(child, self._classes_to_ignore):
+            if not self.is_component_to_process(child):
                 continue
                     
             child_id = self._get_id(child)
@@ -224,7 +235,7 @@ class ComponentGraphExtractor:
 
         for child in getattr(component, "child_components", []):
 
-            if isinstance(child, self._classes_to_ignore):
+            if not self.is_component_to_process(child):
                 continue
 
             self._visit_for_attributes(child, graph, visited)

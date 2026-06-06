@@ -1,5 +1,6 @@
 
 
+import copy
 import os
 from automarl.consts import CONFIGURATION_FILE_NAME
 from automarl.components.loggers.result_logger import ResultLogger, RESULTS_FILENAME
@@ -12,6 +13,60 @@ from optuna.importance import get_param_importances
 from automarl.components.loggers.global_logger import globalWriteLine
 from automarl.utils.files_utils import get_first_path_with_name
 import pandas as pd
+
+
+def filter_hp_opt_results_logger(optuna_study, results_logger, first_trial, last_trial):
+
+    if first_trial > last_trial:
+        raise ValueError(
+            f"first_trial ({first_trial}) must be <= last_trial ({last_trial})"
+        )
+
+    original_df = results_logger.get_dataframe()
+
+    filtered_df = original_df[
+        (original_df["experiment"] >= first_trial)
+        & (original_df["experiment"] <= last_trial)
+    ].copy()
+
+    range_suffix = f"{first_trial}-{last_trial}"
+
+    new_results_filename = (
+        f"{os.path.splitext(results_logger.results_filename)[0]}"
+        f"_{range_suffix}.csv"
+    )
+
+    new_results_logger = ResultLogger(
+        {
+            "base_directory": results_logger.get_artifact_directory(),
+            "artifact_relative_directory": "",
+            "create_new_directory": False,
+            "results_filename": new_results_filename,
+            "results_columns": filtered_df.columns.tolist(),
+        }
+    )
+
+    new_results_logger.process_input_if_not_processed()
+
+    new_results_logger.dataframe = filtered_df
+    new_results_logger.save_dataframe()
+
+    study_name = (
+        f"{optuna_study.study_name}_{range_suffix}"
+        if optuna_study.study_name is not None
+        else f"filtered_{range_suffix}"
+    )
+
+    new_optuna_study = optuna.create_study(
+        direction=optuna_study.direction,
+        study_name=study_name,
+    )
+
+    for trial in optuna_study.trials:
+        if first_trial <= trial.number <= last_trial:
+            new_optuna_study.add_trial(copy.deepcopy(trial))
+
+    return new_optuna_study, new_results_logger
 
 
 

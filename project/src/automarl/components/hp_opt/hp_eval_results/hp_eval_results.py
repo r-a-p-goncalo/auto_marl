@@ -637,6 +637,9 @@ def plot_bayesian_optimization_for_param(
     n_points=300,
     show_confidence=True,
     use_log_x=False,
+    output_dir=None,
+    xlim=None,
+    ylim=None,
 ):
     import numpy as np
     import matplotlib.pyplot as plt
@@ -722,19 +725,24 @@ def plot_bayesian_optimization_for_param(
         (plot_trial_numbers - min_trial) / (max_trial - min_trial + 1e-8)
     )
 
-    # Domain from passed trials only
-    x_min = np.min(plot_x)
-    x_max = np.max(plot_x)
-
-    if x_min == x_max:
-        padding = 1.0 if x_min == 0 else abs(x_min) * 0.1
-        x_min -= padding
-        x_max += padding
+    data_x_min = np.min(plot_x)
+    data_x_max = np.max(plot_x)
+    
+    if data_x_min == data_x_max:
+        padding = 1.0 if data_x_min == 0 else abs(data_x_min) * 0.1
+        data_x_min -= padding
+        data_x_max += padding
     else:
-        padding = 0.05 * (x_max - x_min)
-        x_min -= padding
-        x_max += padding
-
+        padding = 0.05 * (data_x_max - data_x_min)
+        data_x_min -= padding
+        data_x_max += padding
+    
+    # Use plotting limits for GP evaluation if provided
+    if xlim is not None:
+        x_min, x_max = xlim
+    else:
+        x_min, x_max = data_x_min, data_x_max
+    
     x_grid = np.linspace(x_min, x_max, n_points)
 
     # Standardize X and y for GP stability
@@ -771,16 +779,24 @@ def plot_bayesian_optimization_for_param(
     best_y = np.min(plot_y) if minimize else np.max(plot_y)
 
     acquisition_function = acquisition_function.lower()
-    if acquisition_function == "ei":
-        acq = expected_improvement(mu, sigma, best_y, minimize=minimize, xi=xi)
-        acq_label = "Expected Improvement"
-    elif acquisition_function == "ucb":
-        acq = upper_confidence_bound(mu, sigma, minimize=minimize, xi=max(xi, 1.0))
-        acq_label = "Confidence Bound"
+    
+    if acquisition_function != "none":
+    
+        if acquisition_function == "ei":
+            acq = expected_improvement(mu, sigma, best_y, minimize=minimize, xi=xi)
+            acq_label = "Expected Improvement"
+        elif acquisition_function == "ucb":
+            acq = upper_confidence_bound(mu, sigma, minimize=minimize, xi=max(xi, 1.0))
+            acq_label = "Confidence Bound"
+
+        else:
+            raise ValueError(
+                f"Unsupported acquisition_function '{acquisition_function}'. Use 'ei' or 'ucb'."
+            )
+        
     else:
-        raise ValueError(
-            f"Unsupported acquisition_function '{acquisition_function}'. Use 'ei' or 'ucb'."
-        )
+        acq = None
+        acq_label = None
 
     fig, ax1 = plt.subplots(figsize=(9, 6))
 
@@ -810,34 +826,61 @@ def plot_bayesian_optimization_for_param(
     ax1.set_xlabel(f"log10({hyperparam})" if use_log_x else hyperparam)
     ax1.set_ylabel("Objective")
 
-    ax2 = ax1.twinx()
-    ax2.plot(
-        x_grid,
-        acq,
-        color="orange",
-        linestyle="--",
-        linewidth=2,
-        label=acq_label,
-    )
-    ax2.set_ylabel("Acquisition")
+    if xlim is not None:
+        ax1.set_xlim(*xlim)
 
-    best_acq_idx = int(np.argmax(acq))
-    ax2.scatter(
-        [x_grid[best_acq_idx]],
-        [acq[best_acq_idx]],
-        color="purple",
-        s=80,
-        label="Best acquisition point",
-    )
+    if ylim is not None:
+        ax1.set_ylim(*ylim)
 
-    ax1.set_title(f"{hyperparam} vs Objective with GP + {acq_label}")
+    if acq is not None:
+
+        ax2 = ax1.twinx()
+        ax2.plot(
+            x_grid,
+            acq,
+            color="orange",
+            linestyle="--",
+            linewidth=2,
+            label=acq_label,
+        )
+        ax2.set_ylabel("Acquisition")
+
+        best_acq_idx = int(np.argmax(acq))
+        ax2.scatter(
+            [x_grid[best_acq_idx]],
+            [acq[best_acq_idx]],
+            color="purple",
+            s=80,
+            label="Best acquisition point",
+        )
+    else:
+        ax2 = None
+
+    ax1.set_title(f"{hyperparam} vs Objective with GP")
     ax1.grid(True)
-
     lines1, labels1 = ax1.get_legend_handles_labels()
-    lines2, labels2 = ax2.get_legend_handles_labels()
-    ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+
+    if ax2 is not None:
+        lines2, labels2 = ax2.get_legend_handles_labels()    
+        ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+    
+    else:
+        ax1.legend(lines1, labels1, loc="best")
 
     plt.tight_layout()
+
+    if output_dir is not None:
+        import os
+
+        filename = f"{optuna_study.study_name}_{hyperparam}_bayesian_fit.svg"
+        filepath = os.path.join(output_dir, filename)
+
+        plt.savefig(
+            filepath,
+            format="svg",
+            bbox_inches="tight",
+        )
+
     plt.show()
 
     print("Learned kernel:", gp.kernel_)
@@ -848,7 +891,10 @@ def plot_bayesian_optimization_for_params(
     params=None,
     acquisition_function="ei",
     use_log_x=False,
-    acquisition_points=300
+    acquisition_points=300,
+    output_dir=None,
+    x_lim=None,
+    y_lim=None
 ):
     
     if trials_to_use is None:
@@ -873,7 +919,10 @@ def plot_bayesian_optimization_for_params(
                 hyperparam=param,
                 acquisition_function=acquisition_function,
                 use_log_x=use_log_x,
-                n_points=acquisition_points
+                n_points=acquisition_points,
+                output_dir=output_dir,
+                xlim=x_lim,
+                ylim=y_lim,
             )
     else:
         plot_bayesian_optimization_for_param(
@@ -882,5 +931,8 @@ def plot_bayesian_optimization_for_params(
             hyperparam=params,
             acquisition_function=acquisition_function,
             use_log_x=use_log_x,
-            n_points=acquisition_points
+            n_points=acquisition_points,
+            output_dir=output_dir,
+                xlim=x_lim,
+                ylim=y_lim,
         )

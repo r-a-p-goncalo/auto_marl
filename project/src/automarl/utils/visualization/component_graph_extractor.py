@@ -49,26 +49,56 @@ class ComponentGraphExtractor:
         return type(component).__name__
     
 
-    def _check_and_add_edge(self, component : Component, target : Component, graph : Graph, label = None):
+    def _check_and_add_edge(self, component : Component, target : Component, graph : Graph, label = None, edge_type = GraphEdge.REFERENCE_TYPE):
+                
+                '''
+                Checks if it makes sense to add an edge from a component to a target and adds it
+                '''
                 
                 if isinstance(target, self._classes_to_ignore):
                     return False
 
-                if target in component.child_components:
-                    return False
+                existent_edges = graph.get_edges(self._get_id(component), self._get_id(target))
 
+                if len(existent_edges) > 0:
+                    
+                    if len(existent_edges) > 1:
+                        raise NotImplementedError("Not implemented logic for more than one edge between 2 different components")
+                    
+                    existent_edge : GraphEdge = existent_edges[0]
+
+                    if existent_edge.label is None and label is not None:
+
+                        graph.add_edge( # in the case of an existent edge with a different type with no label, we add the passed label
+                            GraphEdge(
+                                source=self._get_id(component),
+                                target=self._get_id(target),
+                                edge_type=existent_edge.edge_type,
+                                label=label                    
+                            )
+                        )  
+
+                        graph.remove_edge(existent_edge) # we remove the previous edge
+
+                        return True
+                
+                
                 graph.add_edge(
-                    GraphEdge(
-                        source=self._get_id(component),
-                        target=self._get_id(target),
-                        edge_type=GraphEdge.REFERENCE_TYPE,
-                        label=label                    
-                    )
-                )        
+                        GraphEdge(
+                            source=self._get_id(component),
+                            target=self._get_id(target),
+                            edge_type=edge_type,
+                            label=label                    
+                        )
+                    )        
 
                 return True
     
     def is_component_to_process(self, value):
+
+        '''
+        Returns if a component should be ignored or not in the graph
+        '''
 
         return isinstance(value, Component) and not isinstance(value, self._classes_to_ignore) and not value.name in self._names_to_ignore
         
@@ -78,6 +108,10 @@ class ComponentGraphExtractor:
         component: Component,
         graph : Graph
     ) -> dict[str, str]:
+        
+        '''
+        Generates 
+        '''
 
         if not self.include_inputs:
             return {}
@@ -121,7 +155,7 @@ class ComponentGraphExtractor:
                 if len(value) > 0:
                     for k, v in value.items():
                         if self.is_component_to_process(v):
-                            self._check_and_add_edge(component, v, graph, label=f"{key}['{k}']")
+                            self._check_and_add_edge(component, v, graph, label=f"{key}[{k}]")
 
 
             attributes[key] = self._serialize_value(value)
@@ -163,6 +197,10 @@ class ComponentGraphExtractor:
 
     def extract(self, roots: list[Component]) -> Graph:
 
+        '''
+        Generates the graph from a list of component roots
+        '''
+
         graph = Graph()
 
         for root in roots:
@@ -185,14 +223,15 @@ class ComponentGraphExtractor:
 
     def _visit_for_child_parent_relations(self, component, graph: Graph, visited: set[int]):
 
+        '''
+        Generates the edges that describe parent-children relationships
+        '''
+
         cid = id(component)
         node_id = self._get_id(component)
 
-
         if cid in visited:
             return
-
-        
 
         visited.add(cid)
 
@@ -213,7 +252,12 @@ class ComponentGraphExtractor:
 
             self._visit_for_child_parent_relations(child, graph, visited)
 
+
     def _visit_for_attributes(self, component, graph: Graph, visited: set[int]):
+
+        '''
+        Visits the nodes in the graph as to extract the attributes (input values)
+        '''
 
         cid = id(component)
     
@@ -221,7 +265,7 @@ class ComponentGraphExtractor:
 
         if cid not in visited:
             
-            graph.add_node(
+            graph.add_node( # this will substitute the node
                 GraphNode(
                     id=node_id,
                     display_name=self._get_display_name(component),

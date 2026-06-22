@@ -24,6 +24,21 @@ automarl/
 └── base_configurations/
 ```
 
+# Why AutoMARL?
+
+AutoMARL focuses on experiment automation.
+
+Unlike traditional RL libraries that require manually written training scripts,
+AutoMARL represents complete RL pipelines as serializable component trees.
+
+This enables:
+
+- Dynamic pipeline generation
+- Hyperparameter optimization
+- Experiment reproducibility
+- Pipeline visualization
+- Future support for meta-learning and AutoRL
+
 
 
 

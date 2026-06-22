@@ -16,9 +16,9 @@ Component(metaclass=Schema)
 This hierarchy allows entire experiments to be represented as a single component tree.
 
 
-## Schemas
+## Schemas and Components
 
-Schemas define the structure of a component.
+Simply put, `schema` is what we call the class of a `component`
 
 Internally, the framework uses the `Schema` metaclass add aditional logic to the parameters of the components, namely:
 
@@ -39,7 +39,7 @@ class MyComponent(Component):
     }
 ```
 
-The schema automatically validates inputs and provides a consistent configuration interface.
+The schema automatically validates inputs and provides a consistent configuration interface. This is done to be easier to catch problems in complex component systems, where the stacktrace will be unintelligible if an input fails to verify certain conditions and is only noted when it is used.
 
 
 ## Input System
@@ -53,7 +53,7 @@ Component parameters are described through `ParameterSignature`, with the argume
 | `possible_types` | List of accepted types for the parameter. |
 | `validator` | Custom validation function executed on the supplied value. |
 | `ignore_at_serialization` | Whether the parameter should be included when serializing the component configuration. |
-| `priority` | Makes the parameter visible to parent components and optimization pipelines. |
+| `priority` | An integer that defines the order in which inputs should be processed. |
 | `on_pass` | Functions applied to the component after a value is passed to the input. |
 | `custom_dict` | Extra custom values that allow for extra logic. |
 | `description` | Human-readable description of the parameter. |
@@ -94,6 +94,8 @@ RL Pipeline
 │   └── Model
 └── Evaluator
 ```
+
+
 
 ## Localizations
 

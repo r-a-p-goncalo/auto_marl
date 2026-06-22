@@ -69,6 +69,12 @@ Running the pipeline executes the complete experiment.
 
 ## Example RL Configuration
 
+An example implementation of an RL algorithm is PPO for CartPole.
+
+The component system can be resumed to:
+
+![Architecture Diagram](/media/diagrams/rl_component_systems/PPO_CartPole.svg)
+
 Conceptually:
 
 ```python

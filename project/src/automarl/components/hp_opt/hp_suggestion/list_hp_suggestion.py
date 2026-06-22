@@ -1,6 +1,6 @@
 from automarl.components.hp_opt.hp_suggestion.hyperparameter_suggestion import HyperparameterSuggestion
-from automarl.utils.json_utils.custom_json_logic import register_custom_strategy
-from automarl.utils.json_utils.json_component_utils import decode_components_input_element
+from automarl.serialization.custom_json_logic import register_custom_strategy
+from automarl.serialization.json_component_utils import decode_components_input_element
 import optuna
 
 

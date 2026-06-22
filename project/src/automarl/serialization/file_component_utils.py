@@ -7,7 +7,7 @@ import pickle
 from automarl.components.basic_components.state_management import load_component_from_folder
 from automarl.component import Component
 from automarl.consts import CONFIGURATION_FILE_NAME, LOADED_COMPONENT_FILE_NAME
-from automarl.utils.json_utils.json_component_utils import component_from_json_string
+from automarl.serialization.json_component_utils import component_from_json_string
 from automarl.components.loggers.global_logger import globalWriteLine
 
 

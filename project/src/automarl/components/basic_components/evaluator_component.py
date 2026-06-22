@@ -2,7 +2,7 @@
 
 from automarl.component import Component, requires_input_process
 from automarl.core.advanced_input_management import ComponentParameterSignature
-from automarl.utils.json_utils.json_component_utils import gen_component_from
+from automarl.serialization.json_component_utils import gen_component_from
 from automarl.components.basic_components.exec_component import ExecComponent
 
 class EvaluatorComponent(ExecComponent):

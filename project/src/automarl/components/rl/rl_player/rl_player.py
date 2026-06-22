@@ -9,7 +9,7 @@ from automarl.components.basic_components.state_management import StatefulCompon
 
 from automarl.components.rl.rl_setup_util import initialize_agents_components
 
-from automarl.utils.configuration_component_utils import save_configuration
+from automarl.serialization.configuration_component_utils import save_configuration
 from automarl.components.rl.environment.aec_environment import AECEnvironmentComponent
 import torch
 

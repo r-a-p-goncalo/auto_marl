@@ -19,7 +19,7 @@ def generate_path(component_path, target_path_dir='', target_path_name=None):
 
 def load_component(component_path):
 
-    from automarl.utils.json_utils.json_component_utils import gen_component_from_path
+    from automarl.serialization.json_component_utils import gen_component_from_path
 
     component = gen_component_from_path(component_path)
 

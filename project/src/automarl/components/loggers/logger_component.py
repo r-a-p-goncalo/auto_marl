@@ -13,7 +13,7 @@ import os
 import pandas as pd
 
 from automarl.utils.smart_enum import SmartEnum
-from automarl.utils.json_utils.json_component_utils import json_string_of_component
+from automarl.serialization.json_component_utils import json_string_of_component
 from automarl.components.loggers.global_logger import globalWriteLine
 
 

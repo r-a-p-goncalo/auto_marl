@@ -3,7 +3,7 @@
 from automarl.component import Component
 import optuna
 from automarl.components.hp_opt.hp_suggestion.hyperparameter_suggestion import HyperparameterSuggestion
-from automarl.utils.json_utils.custom_json_logic import register_custom_strategy
+from automarl.serialization.custom_json_logic import register_custom_strategy
 
 
 class DisjointHyperparameterSuggestion(HyperparameterSuggestion):

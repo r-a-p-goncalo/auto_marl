@@ -8,7 +8,7 @@ from automarl.utils.class_util import get_class_from, is_valid_str_class_definit
 
 from enum import Enum
 
-from automarl.utils.json_utils.custom_json_logic import get_custom_strategy
+from automarl.serialization.custom_json_logic import get_custom_strategy
 from automarl.core.localizations import get_component_by_localization
 from automarl.components.loggers.global_logger import globalWriteLine
 
@@ -685,7 +685,7 @@ def gen_component_from_path(path, parent_component_for_generated : Component = N
 
     '''Gens a component from a path, either a file or a directory'''
 
-    from automarl.utils.file_component_utils import gen_component_in_directory, gen_component_in_file_path
+    from automarl.serialization.file_component_utils import gen_component_in_directory, gen_component_in_file_path
 
     if not os.path.exists(path):
         raise Exception(f"Path does not exist: {path}")

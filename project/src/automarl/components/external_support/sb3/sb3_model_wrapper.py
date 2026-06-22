@@ -5,7 +5,7 @@ from automarl.component import Component, ParameterSignature, requires_input_pro
 from automarl.components.external_support.sb3.sb3_utils import load_policy_network_from_architecture, load_sb3_net
 from automarl.components.ml.models.model_components import ModelComponent
 from automarl.components.ml.models.torch_model_components import TorchModelComponent
-from automarl.utils.json_utils.shape_json_utils import CustomSpaceJsonEncoderDecoder # the act of importing this registers it
+from automarl.serialization.shape_json_utils import CustomSpaceJsonEncoderDecoder # the act of importing this registers it
 from automarl.components.loggers.global_logger import globalWriteLine
 import torch
 

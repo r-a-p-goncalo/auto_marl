@@ -22,7 +22,7 @@ def gen_default_hp_config_path(path_to_store_experiment, experiment_relative_pat
 def main(component_configuration_path=None, path_to_store_experiment='.\\data\\experiments', create_new_directory=None, experiment_relative_path=None, global_logger_level=None, global_logger_path=None, default_logger_level=None):
     
 
-    from automarl.utils.json_utils.json_component_utils import gen_component_from_path
+    from automarl.serialization.json_component_utils import gen_component_from_path
     from automarl.components.loggers.logger_component import DEBUG_LEVEL, change_default_logger_level
     from automarl.components.loggers.global_logger import activate_global_logger
 

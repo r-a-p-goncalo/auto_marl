@@ -6,7 +6,7 @@ import subprocess
 import time
 from typing import final
 from automarl.component import Component, requires_input_process
-from automarl.utils.json_utils.json_component_utils import  gen_component_from
+from automarl.serialization.json_component_utils import  gen_component_from
 from automarl.utils.files_utils import write_text_to_file, read_text_from_file
 from automarl.components.basic_components.artifact_management import ArtifactComponent, find_artifact_component_first_parent_directory
 import os

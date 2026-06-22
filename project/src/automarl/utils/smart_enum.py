@@ -2,7 +2,7 @@
 
 from enum import Enum, EnumMeta
 
-from automarl.utils.json_utils.custom_json_logic import CustomJsonLogic, register_custom_strategy
+from automarl.serialization.custom_json_logic import CustomJsonLogic, register_custom_strategy
 
 class SmartEnumMeta(EnumMeta):
     def __repr__(cls):

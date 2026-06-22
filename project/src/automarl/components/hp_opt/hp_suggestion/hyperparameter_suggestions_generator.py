@@ -1,7 +1,7 @@
 
 from automarl.component import Component
 
-from automarl.utils.json_utils.json_component_utils import decode_components_input_element, is_valid_component_tuple_definition
+from automarl.serialization.json_component_utils import decode_components_input_element, is_valid_component_tuple_definition
 
 from automarl.utils.class_util import get_class_from
 from automarl.components.hp_opt.hp_suggestion.hyperparameter_suggestion import HyperparameterSuggestion

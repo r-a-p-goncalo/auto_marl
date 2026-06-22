@@ -5,7 +5,7 @@ from automarl.utils.random_utils import generate_seed
 import pandas
 from automarl.component import Component
 from automarl.core.advanced_input_management import ComponentParameterSignature
-from automarl.utils.json_utils.json_component_utils import gen_component_from
+from automarl.serialization.json_component_utils import gen_component_from
 from automarl.components.loggers.logger_component import LoggerSchema, use_logger
 from automarl.components.rl.evaluators.rl_component_evaluator import RLPipelineEvaluator
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
@@ -16,7 +16,7 @@ from automarl.core.input_management import ParameterSignature
 from automarl.components.rl.rl_player.rl_player import RLPlayer
 from automarl.components.rl.evaluators.rl_std_avg_evaluator import LastValuesAvgStdEvaluator
 from automarl.utils.files_utils import loadDataframe, saveDataframe
-from automarl.utils.configuration_component_utils import save_configuration
+from automarl.serialization.configuration_component_utils import save_configuration
 from automarl.components.rl.agent.agent_components import AgentSchema
 from automarl.components.rl.environment.environment_components import EnvironmentSampler
 

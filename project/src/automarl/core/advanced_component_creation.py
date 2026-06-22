@@ -2,7 +2,7 @@
 
 from automarl.component import Component
 from automarl.utils.class_util import get_all_subclasses, get_class_from, get_class_from_string
-from automarl.utils.json_utils.json_component_utils import gen_component_from
+from automarl.serialization.json_component_utils import gen_component_from
 
 
 def create_component_with_look_for_class(component_definition):

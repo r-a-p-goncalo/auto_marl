@@ -12,7 +12,7 @@ from automarl.components.loggers.result_logger import ResultLogger
 from automarl.components.loggers.logger_component import ComponentWithLogging
 
 from automarl.utils.files_utils import write_text_to_file, read_text_from_file
-from automarl.utils.json_utils.json_component_utils import gen_component_from_dict,  dict_from_json_string, json_string_of_component_dict, value_from_json_string
+from automarl.serialization.json_component_utils import gen_component_from_dict,  dict_from_json_string, json_string_of_component_dict, value_from_json_string
 
 import optuna
 

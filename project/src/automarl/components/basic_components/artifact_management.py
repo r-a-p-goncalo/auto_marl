@@ -8,7 +8,7 @@ from automarl.core.input_management import ParameterSignature
 
 import os
 
-from automarl.utils.configuration_component_utils import save_configuration
+from automarl.serialization.configuration_component_utils import save_configuration
 from automarl.components.loggers.global_logger import globalWriteLine
 from automarl.consts import CONFIGURATION_FILE_NAME
 

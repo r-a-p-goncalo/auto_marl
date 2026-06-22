@@ -6,7 +6,7 @@ from automarl.consts import CONFIGURATION_FILE_NAME
 from automarl.components.loggers.result_logger import ResultLogger, RESULTS_FILENAME
 from automarl.components.hp_opt.hp_optimization_pipeline import HyperparameterOptimizationPipeline, OPTUNA_STUDY_PATH, BASE_CONFIGURATION_NAME
 from automarl.components.rl.rl_pipeline import RLPipelineComponent
-from automarl.utils.json_utils.json_component_utils import dict_from_path, gen_component_from
+from automarl.serialization.json_component_utils import dict_from_path, gen_component_from
 from automarl.utils.optuna_utils import load_study_from_database
 import optuna
 from optuna.importance import get_param_importances

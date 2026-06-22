@@ -5,7 +5,7 @@ import os
 import shutil
 
 from automarl.utils.files_utils import open_or_create_folder
-from automarl.utils.json_utils.json_component_utils import dict_from_json_string, json_string_of_component_dict
+from automarl.serialization.json_component_utils import dict_from_json_string, json_string_of_component_dict
 from experiments.paths import HP_SCRIPT_PATH, SCRIPT_PATH
 
 

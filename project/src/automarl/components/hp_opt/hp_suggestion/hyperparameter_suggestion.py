@@ -2,8 +2,8 @@
 from typing import Union
 from automarl.component import Component
 
-from automarl.utils.json_utils.json_component_utils import decode_components_input_element, get_child_dict_from_localization
-from automarl.utils.json_utils.custom_json_logic import CustomJsonLogic, register_custom_strategy
+from automarl.serialization.json_component_utils import decode_components_input_element, get_child_dict_from_localization
+from automarl.serialization.custom_json_logic import CustomJsonLogic, register_custom_strategy
 import optuna
 
 from automarl.core.localizations import get_component_by_localization_list, get_last_collection_where_value_is, safe_get, safe_general_remove

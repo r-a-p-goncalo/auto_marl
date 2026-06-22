@@ -6,7 +6,7 @@
 
 from automarl.component import Component
 from automarl.core.input_management import ParameterSignature
-from automarl.utils.json_utils.json_component_utils import gen_component_from
+from automarl.serialization.json_component_utils import gen_component_from
 from automarl.core.localizations import get_component_by_localization
 
 

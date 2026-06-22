@@ -2,7 +2,7 @@
 
 
 from automarl.components.rl.agent.agent_components import AgentSchema
-from automarl.utils.json_utils.json_component_utils import gen_component_from
+from automarl.serialization.json_component_utils import gen_component_from
 from automarl.components.rl.environment.aec_environment import AECEnvironmentComponent
              
 

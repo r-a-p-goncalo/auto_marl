@@ -1,7 +1,7 @@
 import json
 import numpy as np
 import gymnasium as gym
-from automarl.utils.json_utils.custom_json_logic import CustomJsonLogic, register_custom_strategy
+from automarl.serialization.custom_json_logic import CustomJsonLogic, register_custom_strategy
 
 '''
 Has custom class for encoding and decoding states

@@ -9,7 +9,7 @@ from automarl.components.rl.rl_player.rl_player import RLPlayer
 from automarl.core.input_management import ParameterSignature
 from automarl.components.rl.policy.policy import Policy
 from automarl.utils.class_util import get_class_from
-from automarl.utils.json_utils.json_component_utils import gen_component_from
+from automarl.serialization.json_component_utils import gen_component_from
 from automarl.component import requires_input_process
 
 

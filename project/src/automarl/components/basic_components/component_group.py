@@ -15,7 +15,7 @@ from automarl.components.loggers.component_with_results import ComponentWithResu
 from automarl.components.loggers.global_logger import globalWriteLine
 from automarl.components.loggers.logger_component import ComponentWithLogging
 from automarl.components.loggers.result_logger import ResultLogger
-from automarl.utils.json_utils.json_component_utils import gen_component_from_dict, gen_component_from
+from automarl.serialization.json_component_utils import gen_component_from_dict, gen_component_from
 
 from typing import Union
 

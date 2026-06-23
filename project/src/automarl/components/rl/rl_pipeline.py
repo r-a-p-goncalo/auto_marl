@@ -38,6 +38,7 @@ class RLPipelineComponent(ExecComponent, StatefulComponent, ComponentWithEvaluat
                        "environment" : ComponentParameterSignature(default_component_definition=(AECPettingZooEnvironmentWrapper, {}), possible_types=[AECEnvironmentComponent]),
                        
                        "agents" : ComponentDictParameterSignature(default_component_definition={}),
+                       "default_agent_class" : ParameterSignature(default_value=AgentSchema),
                        "agents_input" : ParameterSignature(default_value={}, ignore_at_serialization=True),
                        
                        "rl_trainer" : ComponentParameterSignature(default_component_definition=(RLTrainerComponent, {})),
@@ -180,6 +181,7 @@ class RLPipelineComponent(ExecComponent, StatefulComponent, ComponentWithEvaluat
 
         self.agents : dict[str, AgentSchema] = self.get_input_value("agents", look_in_attribute_with_name="agents") #this is a dictionary with {agentName -> AgentSchema}, the environment must be able to return the agent name
 
+
         for agent_name, agent in self.agents.items():
             self.configure_exisent_agent_component(agent_name, agent)
 
@@ -256,11 +258,21 @@ class RLPipelineComponent(ExecComponent, StatefulComponent, ComponentWithEvaluat
         '''Creates agents that did not exist'''
 
         agents_to_create = [*self.agents_names_in_environment]
+
         for agent_name in self.agents.keys():
             agents_to_create.pop(agents_to_create.index(agent_name))
 
         if len(agents_to_create) > 0:
             self.lg.writeLine(f"Agents to create (not passed in input): {agents_to_create}")
+
+        else:
+            self.lg.writeLine(f"All agents already created")
+            return
+
+        agent_class : type[AgentSchema] = self.get_input_value("default_agent_class")
+        new_agent_class = get_sub_class_with_correct_parameter_signature(agent_class, self.agents_input) #gets the agent class with the correct parameter signature
+
+        self.lg.writeLine(f"Schema to use for agents: {agent_class} -> {new_agent_class}")
 
         for agent_name in agents_to_create: #worth remembering that the order of the initialization of the agents is defined by the environment
 
@@ -271,9 +283,7 @@ class RLPipelineComponent(ExecComponent, StatefulComponent, ComponentWithEvaluat
             
             agent_input["base_directory"] = os.path.join(self.get_artifact_directory(), "agents" )
             
-            agent_class = get_sub_class_with_correct_parameter_signature(AgentSchema, self.agents_input) #gets the agent class with the correct parameter signature
-
-            self.agents[agent_name] = self.initialize_child_component(agent_class, input=agent_input)
+            self.agents[agent_name] = self.initialize_child_component(new_agent_class, input=agent_input)
 
             self.lg.writeLine("Created agent in training " + agent_name + " with base directory " + self.agents[agent_name].get_base_directory() + '\n')
 

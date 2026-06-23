@@ -24,6 +24,9 @@ from automarl.components.rl.evaluators.rl_agent_iter_evaluator import RLAgentIte
 
 # TODO: SHARED OPTIMIZER AND PREDICTIONS
 
+def experiment_name():
+    return "connectorfour_ppo_jesp"
+
 def config_dict():
 
     return {

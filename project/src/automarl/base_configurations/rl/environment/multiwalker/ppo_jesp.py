@@ -23,6 +23,9 @@ from automarl.components.rl.trainers.agent_trainer.agent_trainer_acessories impo
 
 # TODO: SHARED OPTIMIZER AND PREDICTIONS
 
+def experiment_name():
+    return "multiwalker_ppo_jesp"
+
 def config_dict():
 
     return {

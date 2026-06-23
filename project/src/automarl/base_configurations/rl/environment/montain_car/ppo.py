@@ -20,6 +20,8 @@ from automarl.components.rl.evaluators.rl_evaluator_player import EvaluatorWithP
 from automarl.components.rl.evaluators.rl_std_avg_evaluator import LastValuesAvgStdEvaluator
 from automarl.components.rl.rl_player.rl_single_player import RLSinglePlayer
 
+def experiment_name():
+    return "montaincar_ppo"
 
 def config_dict():
 

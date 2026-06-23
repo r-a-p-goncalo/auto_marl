@@ -20,6 +20,9 @@ from automarl.components.rl.trainers.agent_trainer.agent_trainer_component_dqn i
 from automarl.components.rl.learners.q_learner import DeepQLearnerSchema, DoubleDeepQLearnerSchema
 from automarl.components.rl.exploration.epsilong_greedy import EpsilonGreedyStepDecayStrategy
 
+def experiment_name():
+    return "connectorfour_dqn"
+
 def config_dict():
 
     return {

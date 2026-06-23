@@ -39,6 +39,8 @@ from automarl.components.rl.rl_pipeline import RLPipelineComponent
 from automarl.components.rl.trainers.agent_trainer.agent_trainer_component_dqn import AgentTrainerDQN
 from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 
+def experiment_name():
+    return "montaincar_dqn_sb3"
 
 def config_dict():
 

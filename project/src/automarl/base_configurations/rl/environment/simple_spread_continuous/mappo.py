@@ -18,6 +18,8 @@ from automarl.components.rl.rl_player.rl_parallel_player import RLParallelPlayer
 from automarl.components.rl.trainers.rl_trainer.rl_trainer_mappo import RLTrainerMAPPO
 from automarl.components.rl.learners.ppo_learner_separated import PPOLearnerNoCritic, PPOLearnerOnlyCritic
 
+def experiment_name():
+    return "simplespreadcontinuous_mappo"
 
 def config_dict():
 

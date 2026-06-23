@@ -41,6 +41,8 @@ from automarl.components.rl.trainers.agent_trainer.agent_trainer_component_dqn i
 from automarl.components.fundamentals.translator.tensor_translator import ToTorchTranslator
 from automarl.components.rl.trainers.rl_trainer.single_rl_trainer import SingleRLTrainer
 
+def experiment_name():
+    return "cartpole_dqn_sb3"
 
 def config_dict():
     

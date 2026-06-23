@@ -41,6 +41,11 @@ from automarl.components.ml.memory.torch_memory_component import TorchMemoryComp
 from automarl.components.ml.models.model_initialization_strategy import TorchModelInitializationStrategyOrthogonal
 from automarl.components.rl.trainers.rl_trainer.single_rl_trainer import SingleRLTrainer
 
+
+def experiment_name():
+    return "cartpole_ppo_sb3"
+
+
 def config_dict():
 
     return {

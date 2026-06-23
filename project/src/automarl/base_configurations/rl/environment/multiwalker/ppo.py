@@ -19,6 +19,8 @@ from automarl.components.rl.evaluators.rl_std_avg_evaluator import LastValuesAvg
 
 from automarl.components.rl.rl_player.rl_parallel_player import RLParallelPlayer
 
+def experiment_name():
+    return "multiwalker_ppo"
 
 def config_dict():
 

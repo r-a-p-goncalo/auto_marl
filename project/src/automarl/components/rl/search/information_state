@@ -1,0 +1,16 @@
+
+
+class InformationState:
+    def __init__(
+        self,
+        agent_name,
+        public_state,
+        private_observation,
+        action_mask,
+        history=None,
+    ):
+        self.agent_name = agent_name
+        self.public_state = public_state
+        self.private_observation = private_observation
+        self.action_mask = action_mask
+        self.history = history or []

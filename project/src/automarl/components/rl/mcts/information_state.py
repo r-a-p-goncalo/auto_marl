@@ -1,6 +1,7 @@
 
 
 class InformationState:
+    
     def __init__(
         self,
         agent_name,

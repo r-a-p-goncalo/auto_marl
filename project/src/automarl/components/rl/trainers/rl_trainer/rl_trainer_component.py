@@ -221,6 +221,10 @@ class RLTrainerComponent(ComponentWithLogging, ComponentWithResults, ExecCompone
                 self.agents_trainers[key].values["optimizations_to_do"] = optimizations_for_agent
 
 
+    def get_agents_trainers(self) -> dict[str, AgentTrainer]:
+
+        return self.values["agents_trainers"] 
+
 
 
 

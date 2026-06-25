@@ -485,8 +485,6 @@ class ResultLogger(LoggerSchema):
    
        X_numeric = self.convert_x_to_unique_int_numeric(x_plot.values)
 
-       print(f"X_numeric : {X_numeric}")
-
 
        if isinstance(X_numeric, list):
            X_numeric = np.array(X_numeric)
@@ -525,7 +523,7 @@ class ResultLogger(LoggerSchema):
        ax.grid(True)
 
        if save_path:
-           ax.figure.savefig(self.logDir + '\\' + save_path)
+           ax.figure.savefig(self.get_artifact_directory() + '\\' + save_path)
 
        if to_show:
            plt.show()
@@ -600,7 +598,7 @@ class ResultLogger(LoggerSchema):
         plt.grid(True)
 
         if save_path:
-            plt.savefig(self.logDir + '\\' + save_path)
+            plt.savefig(self.self.get_artifact_directory()  + '\\' + save_path)
 
         if to_show:
             plt.show()

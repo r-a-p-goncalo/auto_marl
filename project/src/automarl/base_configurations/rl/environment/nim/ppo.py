@@ -5,16 +5,16 @@ from automarl.components.ml.memory.torch_memory_component import TorchMemoryComp
 from automarl.components.ml.models.neural_model import FullyConnectedModelSchema
 from automarl.components.ml.optimizers.optimizer_components import AdamOptimizer
 from automarl.components.rl.environment.adversarial.nim_aec_env import NimAECEnvironment
-from automarl.components.rl.learners.ppo_learner import PPOLearner
-from automarl.components.rl.policy.stochastic_policy import MaskedCategoricalStochasticPolicy
-from automarl.components.rl.rl_pipeline import RLPipelineComponent
-from automarl.components.rl.trainers.agent_trainer.agent_trainer_ppo import AgentTrainerPPO
-from automarl.components.rl.trainers.rl_trainer.rl_trainer_component import RLTrainerComponent
 from automarl.components.rl.evaluators.rl_agent_iter_evaluator import RLAgentIterEvaluator
 from automarl.components.rl.evaluators.rl_std_avg_evaluator import LastValuesAvgStdEvaluator
 from automarl.components.rl.evaluators.rl_vs_agents_evaluator import AgentVsAgentsWithPolicy
+from automarl.components.rl.learners.ppo_learner import PPOLearner
 from automarl.components.rl.policy.random_policy import RandomPolicyMasked
-from automarl.components.rl.rl_player.rl_player import RLPlayer
+from automarl.components.rl.policy.stochastic_policy import MaskedCategoricalStochasticPolicy
+from automarl.components.rl.rl_pipeline import RLPipelineComponent
+from automarl.components.rl.rl_player.rl_aec_player import RLAECPlayer
+from automarl.components.rl.trainers.agent_trainer.agent_trainer_ppo import AgentTrainerPPO
+from automarl.components.rl.trainers.rl_trainer.aec_rl_trainer import AECRLTrainer
 
 
 def experiment_name():
@@ -51,7 +51,7 @@ def config_dict():
                 ),
             },
             "rl_trainer": (
-                RLTrainerComponent,
+                AECRLTrainer,
                 {
                     "name": "NimPPOTrainer",
                     "limit_total_steps": 20_000,
@@ -93,27 +93,27 @@ def config_dict():
                     },
                 },
             ),
-
-        "evaluation_report_strategy" : "best",
-
-        "component_evaluator" : (
-            RLAgentIterEvaluator, {
-                "single_agent_evaluators" : [
-
-                (AgentVsAgentsWithPolicy,
+            "evaluation_report_strategy": "best",
+            "component_evaluator": (
+                RLAgentIterEvaluator,
+                {
+                    "single_agent_evaluators": [
+                        (
+                            AgentVsAgentsWithPolicy,
                             {
-                                "policy_type_for_others" : RandomPolicyMasked,
-                                "number_of_episodes" : 200,
-                                "rl_player_definition" : (RLPlayer, {}),
-                                "base_evaluator" : (LastValuesAvgStdEvaluator, {"std_deviation_factor" : 100})
-                            }
-                )
-
-                ]
-
-            }
-            
-        )
-
+                                "policy_type_for_others": RandomPolicyMasked,
+                                "number_of_episodes": 200,
+                                "rl_player_definition": (RLAECPlayer, {}),
+                                "base_evaluator": (
+                                    LastValuesAvgStdEvaluator,
+                                    {
+                                        "std_deviation_factor": 100,
+                                    },
+                                ),
+                            },
+                        ),
+                    ],
+                },
+            ),
         },
     }

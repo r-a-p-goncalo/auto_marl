@@ -32,7 +32,7 @@ class AgentSchema(ComponentWithLogging, StatefulComponent):
     # INITIALIZATION --------------------------------------------------------------------------
 
     parameters_signature = { 
-                        "name" : ParameterSignature(),
+                        "name_in_environment" : ParameterSignature(mandatory=False),
                        "device" : ParameterSignature(get_from_parent=True, ignore_at_serialization=True),
                                    
                        "state_shape" : ParameterSignature(default_value='', description='The shape received by the model, only used when the model was not passed already initialized', ignore_at_serialization=True),
@@ -52,6 +52,14 @@ class AgentSchema(ComponentWithLogging, StatefulComponent):
         super()._process_input_internal()
 
         self.lg.writeLine(f"Processing agent input with values {self.values}\n")
+
+        self.name_in_environment = self.get_input_value("name_in_environment")
+
+        if self.name_in_environment is None:
+            self.name_in_environment = self.name
+
+            self.lg.writeLine(f"Name in environment was not passed, assumed to be the agent's name, {self.name}")
+
         
         self.device = self.get_input_value("device")
     
@@ -123,7 +131,10 @@ class AgentSchema(ComponentWithLogging, StatefulComponent):
          
         self.policy.pass_input({"state_shape" : self.processed_state_shape,
                                "action_shape" : self.action_output_shape,})
+
         
+    def get_name_in_environment(self):
+        return self.name_in_environment
     
     
     

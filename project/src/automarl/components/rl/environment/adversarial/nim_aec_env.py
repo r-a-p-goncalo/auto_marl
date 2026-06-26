@@ -302,14 +302,16 @@ class NimAECEnvironment(AECEnvironmentComponent):
             dtype=np.float32,
         )
 
-    def _make_action_mask(self, stones: Optional[int] = None):
-        stones = self.stones if stones is None else stones
-        mask = np.zeros(self.max_take, dtype=np.float32)
-        n_legal = min(self.max_take, max(0, int(stones)))
-        if n_legal > 0:
-            mask[:n_legal] = 1.0
+    def _make_action_mask(self):
+        mask = np.zeros(self.max_take, dtype=np.int8)
+    
+        for action in range(self.max_take):
+            take = action + 1
+            if take <= self.stones:
+                mask[action] = 1
+    
         return mask
-
+    
     def _is_legal_action_index(self, action_index: int):
         return 0 <= action_index < min(self.max_take, self.stones)
 

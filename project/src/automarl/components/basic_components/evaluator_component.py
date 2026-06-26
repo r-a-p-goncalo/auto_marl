@@ -1,9 +1,87 @@
 
 
 from automarl.component import Component, requires_input_process
-from automarl.core.advanced_input_management import ComponentParameterSignature
+from automarl.core.advanced_input_management import ComponentListParameterSignature, ComponentParameterSignature
 from automarl.serialization.json_component_utils import gen_component_from
 from automarl.components.basic_components.exec_component import ExecComponent
+
+class GroupEvaluator(ExecComponent):
+    
+    '''
+    A component that evaluates a group of components, being able to give it a single numeric score for each    
+    '''
+
+    
+    parameters_signature = {
+        "components_to_evaluate" : ComponentListParameterSignature(mandatory=False)
+                    }    
+    
+    exposed_values = {
+        
+        "last_evaluation" : 0
+    
+    }
+
+    def __init__(self, input = None):
+        super().__init__(input)
+
+        if self.values["last_evaluation"] == 0:
+            self.values["last_evaluation"] = {}
+
+    def _process_input_internal(self):
+        
+        super()._process_input_internal()
+
+
+    # EVALUATION -------------------------------------------------------------------------------
+    
+    @requires_input_process # needs to be extended
+    def get_metrics_strings(self) -> list[str]:
+        '''
+        Gets the keys for the evaluation this evaluator
+        This method is meant to be extended
+        '''
+        return []
+    
+    @requires_input_process
+    def evaluate(self, components_to_evaluate : list[Component]) -> dict:
+        '''
+        Returns a dictionary with the results of the evaluation for each component
+        A value for the key "result" will always exist
+        '''
+
+        if not isinstance(list, components_to_evaluate):
+            components_to_evaluate = [components_to_evaluate]
+
+        for index in range(len(components_to_evaluate)):
+
+            component_to_evaluate = components_to_evaluate[index] 
+
+            if not isinstance(component_to_evaluate, Component):
+                component_to_evaluate = gen_component_from(component_to_evaluate)
+
+            components_to_evaluate[index] = component_to_evaluate
+
+        results = self._evaluate(components_to_evaluate)
+
+        self.values["last_evaluation"] = results
+
+        return results
+
+    #needs to be extended
+    def _evaluate(self, components_to_evaluate : list[Component]) -> dict[str, dict]:
+        return { component_to_evaluate.name : {} for component_to_evaluate in components_to_evaluate}
+    
+    def _algorithm(self):
+        components_to_evaluate = self.get_input_value("components_to_evaluate")
+
+        if components_to_evaluate is None:
+            raise Exception(f"Tried to run evaluator without passing a components to evaluate")
+        
+        results = self.evaluate(components_to_evaluate)
+
+        self.output = {**results}
+
 
 class EvaluatorComponent(ExecComponent):
     

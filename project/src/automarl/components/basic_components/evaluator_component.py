@@ -50,7 +50,7 @@ class GroupEvaluator(ExecComponent):
         A value for the key "result" will always exist
         '''
 
-        if not isinstance(list, components_to_evaluate):
+        if not isinstance(components_to_evaluate, list):
             components_to_evaluate = [components_to_evaluate]
 
         for index in range(len(components_to_evaluate)):

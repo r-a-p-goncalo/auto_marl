@@ -598,12 +598,13 @@ class RLTournament(GroupEvaluator, ComponentWithResults, ComponentWithLogging):
 
     def plot_wins_per_agent(
         self,
-        title: str = "Tournament Wins per Agent",
-        figsize: tuple[int, int] = (8, 5),
+        title: str = "Tournament Results per Agent",
+        figsize: tuple[int, int] = (10, 6),
         save_path: str | None = None,
         show: bool = True,
     ):
-        """Plot the number of tournament wins per concrete internal agent.
+        """
+        Plot wins, draws and losses for every concrete internal agent.
     
         Uses self.values["last_agent_evaluation"], which is populated after
         calling evaluate(...).
@@ -617,32 +618,45 @@ class RLTournament(GroupEvaluator, ComponentWithResults, ComponentWithLogging):
         if len(agent_evaluation) == 0:
             raise ValueError(
                 "No agent evaluation data found. "
-                "Call tournament.evaluate(...) before plotting wins."
+                "Call tournament.evaluate(...) before plotting."
             )
     
-        agent_labels = []
+        labels = []
         wins = []
+        draws = []
+        losses = []
     
-        for _, agent_data in agent_evaluation.items():
-            component_name = agent_data["component"]
-            agent_name = agent_data["agent"]
-    
-            agent_labels.append(f"{component_name}\n{agent_name}")
+        for agent_data in agent_evaluation.values():
+            labels.append(
+                f'{agent_data["component"]}\n{agent_data["agent"]}'
+            )
             wins.append(agent_data["wins"])
+            draws.append(agent_data["draws"])
+            losses.append(agent_data["losses"])
     
         import matplotlib.pyplot as plt
+        import numpy as np
+    
+        x = np.arange(len(labels))
     
         fig, ax = plt.subplots(figsize=figsize)
     
-        ax.bar(agent_labels, wins)
-        ax.set_title(title)
+        ax.bar(x, wins, label="Wins")
+        ax.bar(x, draws, bottom=wins, label="Draws")
+        ax.bar(
+            x,
+            losses,
+            bottom=np.array(wins) + np.array(draws),
+            label="Losses",
+        )
+    
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels, rotation=30, ha="right")
+    
         ax.set_xlabel("Agent")
-        ax.set_ylabel("Wins")
-    
-        ax.tick_params(axis="x", rotation=30)
-    
-        for label in ax.get_xticklabels():
-            label.set_horizontalalignment("right")
+        ax.set_ylabel("Matches")
+        ax.set_title(title)
+        ax.legend()
     
         fig.tight_layout()
     
